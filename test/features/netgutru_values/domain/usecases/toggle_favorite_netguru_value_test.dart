@@ -17,7 +17,7 @@ void main() {
     tested = PutNetguruValue(mockNumberTriviaRepository);
   });
 
-  final testInput = NetguruValue(id: null, text: 'test', isFavorite: true);
+  final testInput = NetguruValue(id: 1, text: 'test', isFavorite: false);
   final testOutput = NetguruValue(id: 1, text: 'test', isFavorite: true);
 
   test(

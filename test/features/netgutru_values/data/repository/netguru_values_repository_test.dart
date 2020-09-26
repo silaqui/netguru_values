@@ -130,7 +130,7 @@ void main() {
   );
 
   group(
-    'get put NetguruValues',
+    'put NetguruValues',
     () {
       final NetguruValue input =
           NetguruValueModel(id: null, text: 'Be bra ...', isFavorite: false);
