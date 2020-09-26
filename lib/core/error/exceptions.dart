@@ -1,0 +1,1 @@
+class MemoryException implements Exception {}
