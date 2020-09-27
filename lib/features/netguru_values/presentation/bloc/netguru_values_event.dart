@@ -6,25 +6,25 @@ abstract class NetguruValuesEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class GetRandomNetguruValue extends NetguruValuesEvent {}
+class GetRandomNetguruValueEvent extends NetguruValuesEvent {}
 
-class GetRandomFavoriteNetguruValue extends NetguruValuesEvent {}
+class GetRandomFavoriteNetguruValueEvent extends NetguruValuesEvent {}
 
-class GetAllNetguruValues extends NetguruValuesEvent {}
+class GetAllNetguruValuesEvent extends NetguruValuesEvent {}
 
-class AddNetguruValues extends NetguruValuesEvent {
+class AddNetguruValuesEvent extends NetguruValuesEvent {
   final NetguruValue value;
 
-  AddNetguruValues(this.value);
+  AddNetguruValuesEvent(this.value);
 
   @override
   List<Object> get props => [value];
 }
 
-class UpdateNetguruValues extends NetguruValuesEvent {
+class ToggleFavoriteNetguruValuesEvent extends NetguruValuesEvent {
   final NetguruValue value;
 
-  UpdateNetguruValues(this.value);
+  ToggleFavoriteNetguruValuesEvent(this.value);
 
   @override
   List<Object> get props => [value];

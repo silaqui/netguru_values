@@ -10,11 +10,11 @@ class MockNetguruValuesRepository extends Mock
 
 void main() {
   PutNetguruValue tested;
-  MockNetguruValuesRepository mockNumberTriviaRepository;
+  MockNetguruValuesRepository mockRepository;
 
   setUp(() {
-    mockNumberTriviaRepository = MockNetguruValuesRepository();
-    tested = PutNetguruValue(mockNumberTriviaRepository);
+    mockRepository = MockNetguruValuesRepository();
+    tested = PutNetguruValue(mockRepository);
   });
 
   final testInput = NetguruValue(id: 1, text: 'test', isFavorite: false);
@@ -24,14 +24,14 @@ void main() {
     'should put the Value in the repository',
     () async {
       // given
-      when(mockNumberTriviaRepository.put(testInput))
+      when(mockRepository.put(testInput))
           .thenAnswer((_) async => Right(testOutput));
       // when
       final actual = await tested(testInput);
       // then
       expect(actual, Right(testOutput));
-      verify(mockNumberTriviaRepository.put(testInput));
-      verifyNoMoreInteractions(mockNumberTriviaRepository);
+      verify(mockRepository.put(testInput));
+      verifyNoMoreInteractions(mockRepository);
     },
   );
 }

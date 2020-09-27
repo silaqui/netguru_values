@@ -8,14 +8,30 @@ abstract class NetguruValuesState extends Equatable {
 
 class Initial extends NetguruValuesState {}
 
-class Empty extends NetguruValuesState {}
-
 class Loading extends NetguruValuesState {}
 
 class Loaded extends NetguruValuesState {
   final NetguruValue value;
 
   Loaded({@required this.value});
+
+  @override
+  List<Object> get props => [value];
+}
+
+class Updated extends NetguruValuesState {
+  final NetguruValue value;
+
+  Updated({@required this.value});
+
+  @override
+  List<Object> get props => [value];
+}
+
+class LoadedList extends NetguruValuesState {
+  final List<NetguruValue> value;
+
+  LoadedList({@required this.value});
 
   @override
   List<Object> get props => [value];

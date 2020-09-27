@@ -11,11 +11,11 @@ class MockNetguruValuesRepository extends Mock
 
 void main() {
   GetRandomFavoriteNetguruValue tested;
-  MockNetguruValuesRepository mockNumberTriviaRepository;
+  MockNetguruValuesRepository mockRepository;
 
   setUp(() {
-    mockNumberTriviaRepository = MockNetguruValuesRepository();
-    tested = GetRandomFavoriteNetguruValue(mockNumberTriviaRepository);
+    mockRepository = MockNetguruValuesRepository();
+    tested = GetRandomFavoriteNetguruValue(mockRepository);
   });
 
   final testValue = NetguruValue(id: 1, text: 'test', isFavorite: true);
@@ -24,14 +24,14 @@ void main() {
     'should get one of the favorite Value from the repository',
     () async {
       // given
-      when(mockNumberTriviaRepository.getRandomFavorite())
+      when(mockRepository.getRandomFavorite())
           .thenAnswer((_) async => Right(testValue));
       // when
       final actual = await tested(NoParams());
       // then
       expect(actual, Right(testValue));
-      verify(mockNumberTriviaRepository.getRandomFavorite());
-      verifyNoMoreInteractions(mockNumberTriviaRepository);
+      verify(mockRepository.getRandomFavorite());
+      verifyNoMoreInteractions(mockRepository);
     },
   );
 }

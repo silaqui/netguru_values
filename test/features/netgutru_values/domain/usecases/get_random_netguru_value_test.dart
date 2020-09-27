@@ -11,11 +11,11 @@ class MockNetguruValuesRepository extends Mock
 
 void main() {
   GetRandomNetguruValue tested;
-  MockNetguruValuesRepository mockNumberTriviaRepository;
+  MockNetguruValuesRepository mockRepository;
 
   setUp(() {
-    mockNumberTriviaRepository = MockNetguruValuesRepository();
-    tested = GetRandomNetguruValue(mockNumberTriviaRepository);
+    mockRepository = MockNetguruValuesRepository();
+    tested = GetRandomNetguruValue(mockRepository);
   });
 
   final testValue = NetguruValue(id: 1, text: 'test', isFavorite: false);
@@ -24,14 +24,14 @@ void main() {
     'should get the Value from the repository',
     () async {
       // given
-      when(mockNumberTriviaRepository.getRandom())
+      when(mockRepository.getRandom())
           .thenAnswer((_) async => Right(testValue));
       // when
       final actual = await tested(NoParams());
       // then
       expect(actual, Right(testValue));
-      verify(mockNumberTriviaRepository.getRandom());
-      verifyNoMoreInteractions(mockNumberTriviaRepository);
+      verify(mockRepository.getRandom());
+      verifyNoMoreInteractions(mockRepository);
     },
   );
 }
