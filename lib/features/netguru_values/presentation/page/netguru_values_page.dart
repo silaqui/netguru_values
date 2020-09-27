@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:netguru_values/features/netguru_values/presentation/widgets/values_body.dart';
+import 'package:netguru_values/features/netguru_values/presentation/widgets/values_fab.dart';
 
 class NetguruValuesPage extends StatelessWidget {
   @override
@@ -13,11 +15,8 @@ class NetguruValuesPage extends StatelessWidget {
           ),
         ],
       ),
-      body: Placeholder(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: Icon(Icons.add),
-      ),
+      body: ValuesBody(),
+      floatingActionButton: ValuesFab(),
     );
   }
 }

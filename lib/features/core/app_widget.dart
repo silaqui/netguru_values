@@ -1,6 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:netguru_values/core/theme/theme.dart';
-import 'package:netguru_values/features/netguru_values/presentation/page/netguru_values_page.dart';
+import 'package:netguru_values/features/routes/router.gr.dart';
 
 class AppWidget extends StatelessWidget {
   @override
@@ -10,7 +11,7 @@ class AppWidget extends StatelessWidget {
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: ThemeMode.system,
-      home: NetguruValuesPage(),
+      builder: ExtendedNavigator(router: Router()),
     );
   }
 }
