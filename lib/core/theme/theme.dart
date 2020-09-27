@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 final lightTheme = ThemeData(
-  primarySwatch: Colors.blue,
+  primarySwatch: Colors.green,
   visualDensity: VisualDensity.adaptivePlatformDensity,
 );
 
