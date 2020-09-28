@@ -67,7 +67,7 @@ class _ValuesFabState extends State<ValuesFab> with TickerProviderStateMixin {
     return Container(
       child: FloatingActionButton(
         onPressed: () =>
-            ExtendedNavigator.of(context).push(Routes.netguruValuesListPage),
+            ExtendedNavigator.of(context).push(Routes.addValuePage),
         tooltip: 'Add Your Value',
         heroTag: 'Add Your Value',
         child: Icon(Icons.add),
@@ -79,7 +79,7 @@ class _ValuesFabState extends State<ValuesFab> with TickerProviderStateMixin {
     return Container(
       child: FloatingActionButton(
         onPressed: () =>
-            ExtendedNavigator.of(context).push(Routes.addValuePage),
+            ExtendedNavigator.of(context).push(Routes.netguruValuesListPage),
         tooltip: 'All Our Values',
         heroTag: 'All Our Values',
         child: Icon(Icons.list),

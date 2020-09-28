@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:netguru_values/dependency_injection.dart';
-import 'package:netguru_values/features/netguru_values/presentation/bloc/netguru_values_bloc.dart';
+import 'package:netguru_values/features/netguru_values/presentation/bloc/netguru_values/netguru_values_bloc.dart';
 import 'package:netguru_values/features/netguru_values/presentation/widgets/value_display.dart';
 
 class ValuesBody extends StatelessWidget {

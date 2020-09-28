@@ -8,13 +8,14 @@ import 'features/netguru_values/domain/usecases/get_random_favorite_netguru_valu
 import 'features/netguru_values/domain/usecases/get_random_netguru_value.dart';
 import 'features/netguru_values/domain/usecases/put_netguru_value.dart';
 import 'features/netguru_values/domain/usecases/toggle_favorite_netguru_value.dart';
-import 'features/netguru_values/presentation/bloc/netguru_values_bloc.dart';
+import 'features/netguru_values/presentation/bloc/netguru_values/netguru_values_bloc.dart';
+import 'features/netguru_values/presentation/bloc/netguru_values_list/netguru_values_list_bloc.dart';
 
 final getIt = GetIt.instance;
 
 Future<void> init() async {
-  getIt.registerFactory(
-      () => NetguruValuesBloc(getIt(), getIt(), getIt(), getIt(), getIt()));
+  getIt.registerFactory(() => NetguruValuesBloc(getIt(), getIt(), getIt()));
+  getIt.registerFactory(() => NetguruValuesListBloc(getIt()));
 
   getIt.registerLazySingleton(() => GetAllNetguruValue(getIt()));
   getIt.registerLazySingleton(() => GetRandomNetguruValue(getIt()));

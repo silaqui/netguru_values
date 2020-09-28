@@ -16,33 +16,62 @@ abstract class NetguruValuesLocalDataSource {
 
 HashMap<int, NetguruValueModel> defaultStorage = HashMap.of({
   1: NetguruValueModel(
-      id: 1,
-      text: "Exceed clients' and colleagues' expectations",
-      isFavorite: false),
+    id: 1,
+    text: "Exceed clients' and colleagues' expectations",
+    isFavorite: false,
+    isDefault: true,
+  ),
   2: NetguruValueModel(
-      id: 2,
-      text:
-          "Take ownership and question the status quo in a constructive manner",
-      isFavorite: false),
+    id: 2,
+    text: "Take ownership and question the status quo in a constructive manner",
+    isFavorite: false,
+    isDefault: true,
+  ),
   3: NetguruValueModel(
-      id: 3,
-      text:
-          "Be brave, curious and experiment. Learn from all successes and failures",
-      isFavorite: false),
+    id: 3,
+    text:
+        "Be brave, curious and experiment. Learn from all successes and failures",
+    isFavorite: false,
+    isDefault: true,
+  ),
   4: NetguruValueModel(
-      id: 4,
-      text: "Act in a way that makes all of us proud",
-      isFavorite: false),
+    id: 4,
+    text: "Act in a way that makes all of us proud",
+    isFavorite: false,
+    isDefault: true,
+  ),
   5: NetguruValueModel(
-      id: 5,
-      text: "Build an inclusive, transparent and socially responsible culture",
-      isFavorite: false),
+    id: 5,
+    text: "Build an inclusive, transparent and socially responsible culture",
+    isFavorite: false,
+    isDefault: true,
+  ),
   6: NetguruValueModel(
-      id: 6,
-      text: "Be ambitious, grow yourself and the people around you",
-      isFavorite: false),
+    id: 6,
+    text: "Be ambitious, grow yourself and the people around you",
+    isFavorite: false,
+    isDefault: true,
+  ),
   7: NetguruValueModel(
-      id: 7, text: "Recognize excellence and engagement", isFavorite: false)
+    id: 7,
+    text: "Recognize excellence and engagement",
+    isFavorite: false,
+    isDefault: true,
+  ),
+  8: NetguruValueModel(id: 8, text: "ASD", isFavorite: false),
+  9: NetguruValueModel(id: 9, text: "ASD", isFavorite: false),
+  10: NetguruValueModel(id: 10, text: "ASD", isFavorite: false),
+  11: NetguruValueModel(id: 11, text: "ASD", isFavorite: true),
+  12: NetguruValueModel(id: 12, text: "ASD", isFavorite: false),
+  13: NetguruValueModel(id: 13, text: "ASD", isFavorite: false),
+  14: NetguruValueModel(id: 14, text: "ASD", isFavorite: false),
+  15: NetguruValueModel(id: 15, text: "ASD", isFavorite: false),
+  16: NetguruValueModel(id: 16, text: "ASD", isFavorite: false),
+  17: NetguruValueModel(id: 17, text: "ASD", isFavorite: false),
+  18: NetguruValueModel(id: 18, text: "ASD", isFavorite: true),
+  19: NetguruValueModel(id: 19, text: "ASD", isFavorite: false),
+  20: NetguruValueModel(id: 20, text: "ASD", isFavorite: false),
+  21: NetguruValueModel(id: 21, text: "ASD", isFavorite: false),
 });
 
 class MapLocalDataSource implements NetguruValuesLocalDataSource {

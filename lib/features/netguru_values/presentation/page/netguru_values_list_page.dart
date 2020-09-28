@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:netguru_values/features/netguru_values/presentation/widgets/values_list_body.dart';
 
 class NetguruValuesListPage extends StatelessWidget {
   @override
@@ -14,7 +15,7 @@ class NetguruValuesListPage extends StatelessWidget {
           },
         ),
       ),
-      body: Placeholder(),
+      body: ValuesListBody(),
     );
   }
 }

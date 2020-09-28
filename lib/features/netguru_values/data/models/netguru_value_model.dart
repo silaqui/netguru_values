@@ -6,9 +6,11 @@ class NetguruValueModel extends NetguruValue {
     @required int id,
     @required String text,
     @required bool isFavorite,
+    bool isDefault = false,
   }) : super(
           id: id,
           text: text,
           isFavorite: isFavorite,
+          isDefault: isDefault,
         );
 }

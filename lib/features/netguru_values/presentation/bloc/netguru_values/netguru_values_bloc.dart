@@ -7,31 +7,22 @@ import 'package:meta/meta.dart';
 import 'package:netguru_values/core/error/failures.dart';
 import 'package:netguru_values/core/usecases/usecase.dart';
 import 'package:netguru_values/features/netguru_values/domain/entities/netguru_value.dart';
-import 'package:netguru_values/features/netguru_values/domain/usecases/get_all_netguru_value.dart';
 import 'package:netguru_values/features/netguru_values/domain/usecases/get_random_favorite_netguru_value.dart';
 import 'package:netguru_values/features/netguru_values/domain/usecases/get_random_netguru_value.dart';
-import 'package:netguru_values/features/netguru_values/domain/usecases/put_netguru_value.dart';
 import 'package:netguru_values/features/netguru_values/domain/usecases/toggle_favorite_netguru_value.dart';
 
 part 'netguru_values_event.dart';
-
 part 'netguru_values_state.dart';
 
-const MEMORY_FAILURE_MESSAGE = 'Memory failure';
-
 class NetguruValuesBloc extends Bloc<NetguruValuesEvent, NetguruValuesState> {
-  final GetAllNetguruValue getAll;
-  final GetRandomNetguruValue getRandom;
-  final GetRandomFavoriteNetguruValue getRandomFavorite;
-  final PutNetguruValue put;
-  final ToggleFavoriteNetguruValue toggleFavorite;
+  final GetRandomNetguruValue _getRandom;
+  final GetRandomFavoriteNetguruValue _getRandomFavorite;
+  final ToggleFavoriteNetguruValue _toggleFavorite;
 
   NetguruValuesBloc(
-    this.getAll,
-    this.getRandom,
-    this.getRandomFavorite,
-    this.put,
-    this.toggleFavorite,
+    this._getRandom,
+    this._getRandomFavorite,
+    this._toggleFavorite,
   ) : super(Initial());
 
   @override
@@ -39,24 +30,13 @@ class NetguruValuesBloc extends Bloc<NetguruValuesEvent, NetguruValuesState> {
     NetguruValuesEvent event,
   ) async* {
     if (event is GetRandomNetguruValueEvent) {
-      yield Loading();
-      final eitherRandomOrFailure = await getRandom(NoParams());
+      final eitherRandomOrFailure = await _getRandom(NoParams());
       yield* _eitherValueOrErrorState(eitherRandomOrFailure);
     } else if (event is GetRandomFavoriteNetguruValueEvent) {
-      yield Loading();
-      final eitherRandomOrFailure = await getRandomFavorite(NoParams());
+      final eitherRandomOrFailure = await _getRandomFavorite(NoParams());
       yield* _eitherValueOrErrorState(eitherRandomOrFailure);
-    } else if (event is GetAllNetguruValuesEvent) {
-      yield Loading();
-      final eitherAllValuesOrFailure = await getAll(NoParams());
-      yield* _eitherAllValuesOrErrorState(eitherAllValuesOrFailure);
-    } else if (event is AddNetguruValuesEvent) {
-      yield Loading();
-      final eitherValuesOrFailure = await put(event.value);
-      yield* _eitherUpdatedOrErrorState(eitherValuesOrFailure);
     } else if (event is ToggleFavoriteNetguruValuesEvent) {
-      yield Loading();
-      final eitherValuesOrFailure = await toggleFavorite(event.value);
+      final eitherValuesOrFailure = await _toggleFavorite(event.value);
       yield* _eitherUpdatedOrErrorState(eitherValuesOrFailure);
     }
   }
@@ -68,15 +48,6 @@ Stream<NetguruValuesState> _eitherValueOrErrorState(
   yield failureOrValues.fold(
     (failure) => Error(message: _mapFailureToMessage(failure)),
     (value) => Loaded(value: value),
-  );
-}
-
-Stream<NetguruValuesState> _eitherAllValuesOrErrorState(
-  Either<Failure, List<NetguruValue>> failureOrValue,
-) async* {
-  yield failureOrValue.fold(
-    (failure) => Error(message: _mapFailureToMessage(failure)),
-    (value) => LoadedList(value: value),
   );
 }
 

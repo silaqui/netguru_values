@@ -33,6 +33,8 @@ flutter_icons:
   image_path: "assets/icon/icon.png"
 
 flutter:
+  assets:
+    - assets/icon/icon.png
   fonts:
     - family: Comfortaa
       fonts:

@@ -9,7 +9,8 @@ import 'package:netguru_values/features/netguru_values/domain/usecases/get_rando
 import 'package:netguru_values/features/netguru_values/domain/usecases/get_random_netguru_value.dart';
 import 'package:netguru_values/features/netguru_values/domain/usecases/put_netguru_value.dart';
 import 'package:netguru_values/features/netguru_values/domain/usecases/toggle_favorite_netguru_value.dart';
-import 'package:netguru_values/features/netguru_values/presentation/bloc/netguru_values_bloc.dart';
+
+import 'file:///C:/git/netguru_values/lib/features/netguru_values/presentation/bloc/netguru_values/netguru_values_bloc.dart';
 
 class MockGetAllNetguruValue extends Mock implements GetAllNetguruValue {}
 
@@ -26,21 +27,16 @@ class MockToggleFavoriteNetguruValue extends Mock
 void main() {
   NetguruValuesBloc tested;
 
-  MockGetAllNetguruValue getAll;
   MockGetRandomNetguruValue getRandom;
   MockGetRandomFavoriteNetguruValue getRandomFavorite;
-  MockPutNetguruValue put;
   MockToggleFavoriteNetguruValue toggleFavorite;
 
   setUp(() {
-    getAll = MockGetAllNetguruValue();
     getRandom = MockGetRandomNetguruValue();
     getRandomFavorite = MockGetRandomFavoriteNetguruValue();
-    put = MockPutNetguruValue();
     toggleFavorite = MockToggleFavoriteNetguruValue();
 
-    tested = NetguruValuesBloc(
-        getAll, getRandom, getRandomFavorite, put, toggleFavorite);
+    tested = NetguruValuesBloc(getRandom, getRandomFavorite, toggleFavorite);
   });
 
   test('initial state should be Initial', () {
@@ -65,11 +61,10 @@ void main() {
     );
 
     test(
-      'should emit [Loading, Loaded] when data is gotten successfully',
-      () async {
+      'should emit [Loaded] when data is gotten successfully',
+          () async {
         // given
         final expected = [
-          Loading(),
           Loaded(value: testValue),
         ];
         when(getRandom(any)).thenAnswer((_) async => Right(testValue));
@@ -81,11 +76,10 @@ void main() {
     );
 
     test(
-      'should emit [Loading, Error] when getting data fails',
-      () async {
+      'should emit [Error] when getting data fails',
+          () async {
         // given
         final expected = [
-          Loading(),
           Error(message: MEMORY_FAILURE_MESSAGE),
         ];
         when(getRandom(any)).thenAnswer((_) async => Left(MemoryFailure()));
@@ -115,11 +109,10 @@ void main() {
     );
 
     test(
-      'should emit [Loading, Loaded] when data is gotten successfully',
-      () async {
+      'should emit [Loaded] when data is gotten successfully',
+          () async {
         // given
         final expected = [
-          Loading(),
           Loaded(value: testValue),
         ];
         when(getRandomFavorite(any)).thenAnswer((_) async => Right(testValue));
@@ -131,11 +124,10 @@ void main() {
     );
 
     test(
-      'should emit [Loading, Error] when getting data fails',
-      () async {
+      'should emit [Error] when getting data fails',
+          () async {
         // given
         final expected = [
-          Loading(),
           Error(message: MEMORY_FAILURE_MESSAGE),
         ];
         when(getRandomFavorite(any))
@@ -148,154 +140,4 @@ void main() {
     );
   });
 
-  group('GetAllNetguruValuesEvent', () {
-    final testValue = [NetguruValue(id: 1, text: 'test', isFavorite: true)];
-
-    test(
-      'should get data from the get all use case',
-      () async {
-        // given
-        when(getAll(NoParams())).thenAnswer((_) async => Right(testValue));
-        // when
-        tested.add(GetAllNetguruValuesEvent());
-        // then
-        await untilCalled(getAll(any));
-        verify(getAll(NoParams()));
-      },
-    );
-
-    test(
-      'should emit [Loading, Loaded] when data is gotten successfully',
-      () async {
-        // given
-        final expected = [
-          Loading(),
-          LoadedList(value: testValue),
-        ];
-        when(getAll(any)).thenAnswer((_) async => Right(testValue));
-        // when
-        tested.add(GetAllNetguruValuesEvent());
-        // then
-        expectLater(tested, emitsInOrder(expected));
-      },
-    );
-
-    test(
-      'should emit [Loading, Error] when getting data fails',
-      () async {
-        // given
-        final expected = [
-          Loading(),
-          Error(message: MEMORY_FAILURE_MESSAGE),
-        ];
-        when(getAll(any)).thenAnswer((_) async => Left(MemoryFailure()));
-        // when
-        tested.add(GetAllNetguruValuesEvent());
-        // then
-        expectLater(tested, emitsInOrder(expected));
-      },
-    );
-  });
-
-  group('AddNetguruValuesEvent', () {
-    final testValue = NetguruValue(id: null, text: 'test', isFavorite: true);
-    final testSavedValue = NetguruValue(id: 1, text: 'test', isFavorite: true);
-
-    test(
-      'should add data with add use case',
-      () async {
-        // given
-        when(put(testValue)).thenAnswer((_) async => Right(testSavedValue));
-        // when
-        tested.add(AddNetguruValuesEvent(testValue));
-        // then
-        await untilCalled(put(any));
-        verify(put(testValue));
-      },
-    );
-
-    test(
-      'should emit [Loading, Updated] when data is putted successfully',
-      () async {
-        // given
-        final expected = [
-          Loading(),
-          Updated(value: testSavedValue),
-        ];
-        when(put(any)).thenAnswer((_) async => Right(testSavedValue));
-        // when
-        tested.add(AddNetguruValuesEvent(testValue));
-        // then
-        expectLater(tested, emitsInOrder(expected));
-      },
-    );
-
-    test(
-      'should emit [Loading, Error] when putting data fails',
-      () async {
-        // given
-        final expected = [
-          Loading(),
-          Error(message: MEMORY_FAILURE_MESSAGE),
-        ];
-        when(put(any)).thenAnswer((_) async => Left(MemoryFailure()));
-        // when
-        tested.add(AddNetguruValuesEvent(testValue));
-        // then
-        expectLater(tested, emitsInOrder(expected));
-      },
-    );
-  });
-
-  group('UpdateNetguruValuesEvent', () {
-    final testValue = NetguruValue(id: 1, text: 'test', isFavorite: false);
-    final testUpdatedValue =
-        NetguruValue(id: 1, text: 'test', isFavorite: true);
-
-    test(
-      'should toggle favorite with toggle favorite use case',
-      () async {
-        // given
-        when(toggleFavorite(testValue))
-            .thenAnswer((_) async => Right(testUpdatedValue));
-        // when
-        tested.add(ToggleFavoriteNetguruValuesEvent(testValue));
-        // then
-        await untilCalled(toggleFavorite(any));
-        verify(toggleFavorite(testValue));
-      },
-    );
-
-    test(
-      'should emit [Loading, Updated] when data is putted successfully',
-      () async {
-        // given
-        final expected = [
-          Loading(),
-          Updated(value: testUpdatedValue),
-        ];
-        when(put(any)).thenAnswer((_) async => Right(testUpdatedValue));
-        // when
-        tested.add(AddNetguruValuesEvent(testValue));
-        // then
-        expectLater(tested, emitsInOrder(expected));
-      },
-    );
-
-    test(
-      'should emit [Loading, Error] when toggling favorite fails',
-      () async {
-        // given
-        final expected = [
-          Loading(),
-          Error(message: MEMORY_FAILURE_MESSAGE),
-        ];
-        when(put(any)).thenAnswer((_) async => Left(MemoryFailure()));
-        // when
-        tested.add(AddNetguruValuesEvent(testValue));
-        // then
-        expectLater(tested, emitsInOrder(expected));
-      },
-    );
-  });
 }
