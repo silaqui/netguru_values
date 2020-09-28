@@ -33,5 +33,18 @@ flutter_icons:
   image_path: "assets/icon/icon.png"
 
 flutter:
+  fonts:
+    - family: Comfortaa
+      fonts:
+        - asset: assets/fonts/Comfortaa-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Comfortaa-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Comfortaa-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Comfortaa-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Comfortaa-Bold.ttf
+          weight: 700
 
   uses-material-design: true
