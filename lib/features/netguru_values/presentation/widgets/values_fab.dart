@@ -103,7 +103,7 @@ class _ValuesFabState extends State<ValuesFab> with TickerProviderStateMixin {
       child: FloatingActionButton(
         backgroundColor: _buttonColor.value,
         onPressed: animate,
-        tooltip: 'Toggle',
+        tooltip: 'Expand actions',
         heroTag: 'Toggle',
         child: AnimatedIcon(
           icon: AnimatedIcons.menu_close,

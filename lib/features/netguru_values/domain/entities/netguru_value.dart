@@ -8,10 +8,10 @@ class NetguruValue extends Equatable {
   final bool isDefault;
 
   NetguruValue({
-    @required this.id,
+    this.id,
     @required this.text,
-    @required this.isFavorite,
-    @required this.isDefault,
+    this.isFavorite = false,
+    this.isDefault = false,
   });
 
   @override

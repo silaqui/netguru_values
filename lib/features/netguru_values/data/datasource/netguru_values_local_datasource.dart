@@ -58,20 +58,6 @@ HashMap<int, NetguruValueModel> defaultStorage = HashMap.of({
     isFavorite: false,
     isDefault: true,
   ),
-  8: NetguruValueModel(id: 8, text: "ASD", isFavorite: false),
-  9: NetguruValueModel(id: 9, text: "ASD", isFavorite: false),
-  10: NetguruValueModel(id: 10, text: "ASD", isFavorite: false),
-  11: NetguruValueModel(id: 11, text: "ASD", isFavorite: true),
-  12: NetguruValueModel(id: 12, text: "ASD", isFavorite: false),
-  13: NetguruValueModel(id: 13, text: "ASD", isFavorite: false),
-  14: NetguruValueModel(id: 14, text: "ASD", isFavorite: false),
-  15: NetguruValueModel(id: 15, text: "ASD", isFavorite: false),
-  16: NetguruValueModel(id: 16, text: "ASD", isFavorite: false),
-  17: NetguruValueModel(id: 17, text: "ASD", isFavorite: false),
-  18: NetguruValueModel(id: 18, text: "ASD", isFavorite: true),
-  19: NetguruValueModel(id: 19, text: "ASD", isFavorite: false),
-  20: NetguruValueModel(id: 20, text: "ASD", isFavorite: false),
-  21: NetguruValueModel(id: 21, text: "ASD", isFavorite: false),
 });
 
 class MapLocalDataSource implements NetguruValuesLocalDataSource {

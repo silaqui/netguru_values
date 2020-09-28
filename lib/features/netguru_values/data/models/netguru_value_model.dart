@@ -3,9 +3,9 @@ import 'package:netguru_values/features/netguru_values/domain/entities/netguru_v
 
 class NetguruValueModel extends NetguruValue {
   NetguruValueModel({
-    @required int id,
+    int id,
     @required String text,
-    @required bool isFavorite,
+    bool isFavorite = false,
     bool isDefault = false,
   }) : super(
           id: id,

@@ -4,10 +4,9 @@ import 'package:mockito/mockito.dart';
 import 'package:netguru_values/core/error/failures.dart';
 import 'package:netguru_values/core/usecases/usecase.dart';
 import 'package:netguru_values/features/netguru_values/domain/entities/netguru_value.dart';
-import 'package:netguru_values/features/netguru_values/domain/usecases/get_all_netguru_value.dart';
 import 'package:netguru_values/features/netguru_values/presentation/bloc/netguru_values_list/netguru_values_list_bloc.dart';
 
-class MockGetAllNetguruValue extends Mock implements GetAllNetguruValue {}
+import 'use_cases_mocks.dart';
 
 void main() {
   NetguruValuesListBloc tested;

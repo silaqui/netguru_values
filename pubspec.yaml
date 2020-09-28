@@ -13,6 +13,7 @@ dependencies:
   flutter_bloc: ^6.0.5
   get_it: ^5.0.1
   auto_route: ^0.6.7
+  flushbar: ^1.10.4
 
   flutter:
     sdk: flutter

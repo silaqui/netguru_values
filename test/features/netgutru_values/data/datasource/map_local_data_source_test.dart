@@ -8,7 +8,6 @@ import 'package:netguru_values/features/netguru_values/data/models/netguru_value
 
 void main() {
   group('get all Values', () {
-    const DEFAULT_VALUES_COUNT = 7;
     MapLocalDataSource tested;
     test(
       'should return all stored Values',
@@ -19,7 +18,7 @@ void main() {
         List<NetguruValueModel> actual = await tested.getAll();
 
         // then
-        expect(actual.length, equals(DEFAULT_VALUES_COUNT));
+        expect(actual.length, equals(defaultStorage.length));
       },
     );
   });
