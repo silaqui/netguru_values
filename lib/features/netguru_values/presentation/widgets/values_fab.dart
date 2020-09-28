@@ -87,6 +87,17 @@ class _ValuesFabState extends State<ValuesFab> with TickerProviderStateMixin {
     );
   }
 
+  Widget toggleOnlyFavorite() {
+    return Container(
+      child: FloatingActionButton(
+        onPressed: () => {},
+        tooltip: 'Show Favorite',
+        heroTag: 'Show Favorite',
+        child: Icon(Icons.favorite_border),
+      ),
+    );
+  }
+
   Widget toggle() {
     return Container(
       child: FloatingActionButton(
@@ -109,13 +120,18 @@ class _ValuesFabState extends State<ValuesFab> with TickerProviderStateMixin {
       children: <Widget>[
         Transform(
           transform:
-              Matrix4.translationValues(0.0, _translateButton.value * 2.0, 0.0),
+              Matrix4.translationValues(0.0, _translateButton.value * 3.0, 0.0),
           child: add(),
         ),
         Transform(
           transform:
-              Matrix4.translationValues(0.0, _translateButton.value, 0.0),
+              Matrix4.translationValues(0.0, _translateButton.value * 2.0, 0.0),
           child: valueList(),
+        ),
+        Transform(
+          transform:
+              Matrix4.translationValues(0.0, _translateButton.value, 0.0),
+          child: toggleOnlyFavorite(),
         ),
         toggle(),
       ],

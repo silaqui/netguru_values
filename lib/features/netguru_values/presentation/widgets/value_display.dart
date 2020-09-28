@@ -12,7 +12,8 @@ class ValueDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: SingleChildScrollView(
+      child: Padding(
+        padding: EdgeInsets.all(40.0),
         child: Text(
           netguruValue.text,
           style: TextStyle(fontSize: 25),
