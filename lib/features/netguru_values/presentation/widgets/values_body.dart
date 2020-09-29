@@ -8,26 +8,33 @@ class ValuesBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<NetguruValuesBloc, NetguruValuesState>(
       builder: (BuildContext context, NetguruValuesState state) {
-        if (state is Initial) {
-          BlocProvider.of<NetguruValuesBloc>(context)
-              .add(GetRandomNetguruValueEvent());
-          return Container();
-        } else if (state is Loaded) {
-          return ValueDisplay(netguruValue: state.value);
-        } else if (state is Error) {
-          return const Center(
-              child: Padding(
+        return AnimatedSwitcher(
+          duration: const Duration(milliseconds: 500),
+          child: _buildPage(context, state),
+        );
+      },
+    );
+  }
+
+  Widget _buildPage(BuildContext context, NetguruValuesState state) {
+    if (state is Loaded) {
+      return ValueDisplay(
+          key: Key(state.value.id.toString()), netguruValue: state.value);
+    } else if (state is Error) {
+      return _noValueMessage();
+    } else {
+      return const Center(child: CircularProgressIndicator());
+    }
+  }
+
+  Widget _noValueMessage() {
+    return const Center(
+        child: Padding(
             padding: EdgeInsets.all(40.0),
             child: Text(
               "We could not get value for you",
               style: TextStyle(fontSize: 25),
               textAlign: TextAlign.center,
-            ),
-          ));
-        } else {
-          return const Center(child: CircularProgressIndicator());
-        }
-      },
-    );
+            )));
   }
 }

@@ -13,7 +13,8 @@ class NetguruValuesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => getIt<NetguruValuesBloc>(),
+      create: (_) =>
+          getIt<NetguruValuesBloc>()..add(GetRandomNetguruValueEvent()),
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Netguru Values'),
