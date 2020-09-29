@@ -10,7 +10,7 @@ class ValuesBody extends StatelessWidget {
       builder: (BuildContext context, NetguruValuesState state) {
         return AnimatedSwitcher(
           transitionBuilder: _transitionBuilder,
-          duration: const Duration(milliseconds: 500),
+          duration: const Duration(milliseconds: 800),
           child: _buildPage(context, state),
         );
       },
@@ -18,9 +18,19 @@ class ValuesBody extends StatelessWidget {
   }
 
   Widget _transitionBuilder(Widget child, Animation<double> animation) {
-    return FadeTransition(
-      opacity: animation,
-      child: child,
+    final fadeTween = TweenSequence([
+      TweenSequenceItem<double>(
+          tween: Tween<double>(begin: 0.0, end: 0.0), weight: 60.0),
+      TweenSequenceItem<double>(
+          tween: Tween<double>(begin: 0.0, end: 1.0), weight: 40.0),
+    ]).animate(animation);
+    final scaleTween = Tween<double>(begin: 0.90, end: 1.0).animate(animation);
+    return ScaleTransition(
+      scale: scaleTween,
+      child: FadeTransition(
+        opacity: fadeTween,
+        child: child,
+      ),
     );
   }
 
@@ -38,7 +48,7 @@ class ValuesBody extends StatelessWidget {
   Widget _noValueMessage(BuildContext context) {
     return Center(
         child: Padding(
-            padding: EdgeInsets.all(40.0),
+            padding: const EdgeInsets.all(40.0),
             child: Text(
               "We could not get value for you",
               style: TextStyle(
