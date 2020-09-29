@@ -22,10 +22,14 @@ class AddValueBloc extends Bloc<AddValueEvent, AddValueState> {
     AddValueEvent event,
   ) async* {
     if (event is SaveNewValueEvent) {
-      final newValue = NetguruValueModel(text: event.netguruValueText);
       yield Saving();
-      final eitherSavedOrFailure = await _putNetguruValue(newValue);
-      yield* _eitherValueOrErrorState(eitherSavedOrFailure);
+      if (event.netguruValueText.isEmpty) {
+        yield Error(message: "Don't be so shy and write something.");
+      } else {
+        final newValue = NetguruValueModel(text: event.netguruValueText);
+        final eitherSavedOrFailure = await _putNetguruValue(newValue);
+        yield* _eitherValueOrErrorState(eitherSavedOrFailure);
+      }
     }
   }
 

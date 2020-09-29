@@ -7,12 +7,11 @@ class ValuesListBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => getIt<NetguruValuesListBloc>(),
+      create: (_) =>
+          getIt<NetguruValuesListBloc>()..add(GetAllNetguruValuesEvent()),
       child: BlocBuilder<NetguruValuesListBloc, NetguruValuesListState>(
         builder: (BuildContext context, NetguruValuesListState state) {
           if (state is Empty) {
-            BlocProvider.of<NetguruValuesListBloc>(context)
-                .add(GetAllNetguruValuesEvent());
             return const Center(child: CircularProgressIndicator());
           } else if (state is LoadedList) {
             return ListView.builder(
@@ -25,9 +24,16 @@ class ValuesListBody extends StatelessWidget {
                         ? const Image(image: AssetImage('assets/icon/icon.png'))
                         : null,
                     title: Text(item.text),
-                    trailing: Icon(item.isFavorite
-                        ? Icons.favorite
-                        : Icons.favorite_border),
+                    trailing: IconButton(
+                      icon: Icon(item.isFavorite
+                          ? Icons.favorite
+                          : Icons.favorite_border),
+                      onPressed: () {
+                        context
+                            .bloc<NetguruValuesListBloc>()
+                            .add(ToggleFavoriteNetguruValuesEvent(item));
+                      },
+                    ),
                   ),
                 );
               },

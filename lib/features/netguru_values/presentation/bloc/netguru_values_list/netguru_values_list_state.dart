@@ -17,6 +17,15 @@ class LoadedList extends NetguruValuesListState {
   List<Object> get props => [value];
 }
 
+class Updated extends NetguruValuesListState {
+  final NetguruValue value;
+
+  Updated({@required this.value});
+
+  @override
+  List<Object> get props => [value];
+}
+
 class Error extends NetguruValuesListState {
   final String message;
 

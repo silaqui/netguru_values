@@ -12,11 +12,12 @@ void main() {
   NetguruValuesListBloc tested;
 
   MockGetAllNetguruValue getAll;
+  MockToggleFavoriteNetguruValue toggleFavoriteNetguruValue;
 
   setUp(() {
     getAll = MockGetAllNetguruValue();
 
-    tested = NetguruValuesListBloc(getAll);
+    tested = NetguruValuesListBloc(getAll, toggleFavoriteNetguruValue);
   });
 
   test('initial state should be Empty', () {

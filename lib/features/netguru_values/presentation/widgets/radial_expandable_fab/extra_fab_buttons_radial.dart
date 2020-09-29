@@ -6,11 +6,11 @@ import '../circular_button.dart';
 
 Widget addRadial(BuildContext context) {
   return CircularButton(
-    color: Theme.of(context).secondaryHeaderColor,
+    color: Theme.of(context).accentColor,
     child: IconButton(
         icon: Icon(
           Icons.add,
-          color: Theme.of(context).primaryColor,
+          color: Theme.of(context).secondaryHeaderColor,
         ),
         onPressed: () =>
             ExtendedNavigator.of(context).push(Routes.addValuePage)),
@@ -19,11 +19,15 @@ Widget addRadial(BuildContext context) {
 
 Widget valueListRadial(BuildContext context) {
   return CircularButton(
-    color: Theme.of(context).secondaryHeaderColor,
+    color: Theme
+        .of(context)
+        .accentColor,
     child: IconButton(
         icon: Icon(
           Icons.list,
-          color: Theme.of(context).primaryColor,
+          color: Theme
+              .of(context)
+              .secondaryHeaderColor,
         ),
         onPressed: () =>
             ExtendedNavigator.of(context).push(Routes.netguruValuesListPage)),

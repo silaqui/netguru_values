@@ -17,7 +17,7 @@ final GetIt getIt = GetIt.instance;
 
 Future<void> init() async {
   getIt.registerFactory(() => NetguruValuesBloc(getIt(), getIt(), getIt()));
-  getIt.registerFactory(() => NetguruValuesListBloc(getIt()));
+  getIt.registerFactory(() => NetguruValuesListBloc(getIt(), getIt()));
   getIt.registerFactory(() => AddValueBloc(getIt()));
 
   getIt.registerLazySingleton(() => GetAllNetguruValue(getIt()));

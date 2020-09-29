@@ -15,7 +15,7 @@ class _FavoriteSwitchRadialState extends State<FavoriteSwitchRadial> {
   @override
   Widget build(BuildContext context) {
     return CircularButton(
-      color: Theme.of(context).secondaryHeaderColor,
+      color: Theme.of(context).accentColor,
       child: AnimatedSwitcher(
         duration: const Duration(milliseconds: 200),
         transitionBuilder: (child, animation) => ScaleTransition(
@@ -27,14 +27,18 @@ class _FavoriteSwitchRadialState extends State<FavoriteSwitchRadial> {
                 onPressed: () => onPress(),
                 icon: Icon(
                   Icons.favorite,
-                  color: Theme.of(context).primaryColor,
+              color: Theme
+                  .of(context)
+                  .secondaryHeaderColor,
                 ),
                 key: const Key("favorite"))
             : IconButton(
                 onPressed: () => onPress(),
                 icon: Icon(
                   Icons.favorite_border,
-                  color: Theme.of(context).primaryColor,
+                  color: Theme
+                      .of(context)
+                      .secondaryHeaderColor,
                 ),
                 key: const Key("favorite_border")),
       ),

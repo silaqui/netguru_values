@@ -16,30 +16,7 @@ class NetguruValuesPage extends StatelessWidget {
       create: (_) =>
           getIt<NetguruValuesBloc>()..add(GetRandomNetguruValueEvent()),
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Netguru Values'),
-          actions: <Widget>[
-            BlocBuilder<NetguruValuesBloc, NetguruValuesState>(
-              builder: (BuildContext context, NetguruValuesState state) {
-                final bloc = context.bloc<NetguruValuesBloc>();
-                if (bloc.state is Loaded) {
-                  final state = bloc.state as Loaded;
-                  final value = state.value;
-                  return IconButton(
-                    icon: Icon(value.isFavorite
-                        ? Icons.favorite
-                        : Icons.favorite_border),
-                    onPressed: () {
-                      bloc.add(ToggleFavoriteNetguruValuesEvent(value));
-                    },
-                  );
-                } else {
-                  return const CircularProgressIndicator();
-                }
-              },
-            ),
-          ],
-        ),
+        appBar: _buildAppBar(),
         body: ValuesBody(),
         floatingActionButton: ExpandableFabRadial(
           children: <Widget>[
@@ -49,6 +26,32 @@ class NetguruValuesPage extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildAppBar() {
+    return AppBar(
+      title: const Text('Netguru Values'),
+      actions: <Widget>[
+        BlocBuilder<NetguruValuesBloc, NetguruValuesState>(
+          builder: (BuildContext context, NetguruValuesState state) {
+            final bloc = context.bloc<NetguruValuesBloc>();
+            if (bloc.state is Loaded) {
+              final state = bloc.state as Loaded;
+              final value = state.value;
+              return IconButton(
+                icon: Icon(
+                    value.isFavorite ? Icons.favorite : Icons.favorite_border),
+                onPressed: () {
+                  bloc.add(ToggleFavoriteNetguruValuesEvent(value));
+                },
+              );
+            } else {
+              return Container();
+            }
+          },
+        ),
+      ],
     );
   }
 }

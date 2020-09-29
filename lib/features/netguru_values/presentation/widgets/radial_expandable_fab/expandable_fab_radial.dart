@@ -66,15 +66,19 @@ class _ExpandableFabRadialState extends State<ExpandableFabRadial>
   @override
   void didChangeDependencies() {
     _buttonColor = ColorTween(
-      begin: Theme.of(context).primaryColor,
+      begin: Theme.of(context).accentColor,
       end: Theme.of(context).secondaryHeaderColor,
     ).animate(CurvedAnimation(
       parent: _animationController,
       curve: const Interval(0.00, 1.00),
     ));
     _buttonIcon = ColorTween(
-      begin: Theme.of(context).secondaryHeaderColor,
-      end: Theme.of(context).primaryColor,
+      begin: Theme
+          .of(context)
+          .secondaryHeaderColor,
+      end: Theme
+          .of(context)
+          .accentColor,
     ).animate(CurvedAnimation(
       parent: _animationController,
       curve: const Interval(0.00, 1.00),

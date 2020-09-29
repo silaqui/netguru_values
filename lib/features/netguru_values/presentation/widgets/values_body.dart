@@ -9,16 +9,18 @@ class ValuesBody extends StatelessWidget {
     return BlocBuilder<NetguruValuesBloc, NetguruValuesState>(
       builder: (BuildContext context, NetguruValuesState state) {
         return AnimatedSwitcher(
-          transitionBuilder: (Widget child, Animation<double> animation) {
-            return ScaleTransition(
-              scale: animation,
-              child: child,
-            );
-          },
+          transitionBuilder: _transitionBuilder,
           duration: const Duration(milliseconds: 500),
           child: _buildPage(context, state),
         );
       },
+    );
+  }
+
+  Widget _transitionBuilder(Widget child, Animation<double> animation) {
+    return FadeTransition(
+      opacity: animation,
+      child: child,
     );
   }
 
@@ -27,19 +29,22 @@ class ValuesBody extends StatelessWidget {
       return ValueDisplay(
           key: Key(state.value.id.toString()), netguruValue: state.value);
     } else if (state is Error) {
-      return _noValueMessage();
+      return _noValueMessage(context);
     } else {
       return const Center(child: CircularProgressIndicator());
     }
   }
 
-  Widget _noValueMessage() {
-    return const Center(
+  Widget _noValueMessage(BuildContext context) {
+    return Center(
         child: Padding(
             padding: EdgeInsets.all(40.0),
             child: Text(
               "We could not get value for you",
-              style: TextStyle(fontSize: 25),
+              style: TextStyle(
+                fontSize: 25,
+                color: Color(Theme.of(context).accentColor.value),
+              ),
               textAlign: TextAlign.center,
             )));
   }
