@@ -11,7 +11,6 @@ class PutNetguruValue implements UseCase<int, NetguruValue> {
 
   @override
   Future<Either<Failure, int>> call(NetguruValue params) async {
-    // ignore: unnecessary_await_in_return
-    return await repository.put(params);
+    return repository.put(params);
   }
 }

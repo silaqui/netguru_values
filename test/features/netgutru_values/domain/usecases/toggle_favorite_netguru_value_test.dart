@@ -3,34 +3,35 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:netguru_values/features/netguru_values/domain/entities/netguru_value.dart';
 import 'package:netguru_values/features/netguru_values/domain/repositories/netguru_values_repository.dart';
-import 'package:netguru_values/features/netguru_values/domain/usecases/put_netguru_value.dart';
+import 'package:netguru_values/features/netguru_values/domain/usecases/toggle_favorite_netguru_value.dart';
 
 class MockNetguruValuesRepository extends Mock
     implements NetguruValuesRepository {}
 
 void main() {
-  PutNetguruValue tested;
+  ToggleFavoriteNetguruValue tested;
   MockNetguruValuesRepository mockRepository;
 
   setUp(() {
     mockRepository = MockNetguruValuesRepository();
-    tested = PutNetguruValue(mockRepository);
+    tested = ToggleFavoriteNetguruValue(mockRepository);
   });
 
   const testInput = NetguruValue(id: 1, text: 'test');
+  const testFavoriteInput = NetguruValue(id: 1, text: 'test', isFavorite: true);
   const idFromDatabase = 1;
 
   test(
     'should put the Value in the repository',
     () async {
       // given
-      when(mockRepository.put(testInput))
+      when(mockRepository.put(testFavoriteInput))
           .thenAnswer((_) async => const Right(idFromDatabase));
       // when
       final actual = await tested(testInput);
       // then
       expect(actual, const Right(idFromDatabase));
-      verify(mockRepository.put(testInput));
+      verify(mockRepository.put(testFavoriteInput));
       verifyNoMoreInteractions(mockRepository);
     },
   );

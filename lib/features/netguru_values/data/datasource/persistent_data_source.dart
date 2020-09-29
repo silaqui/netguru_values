@@ -82,6 +82,7 @@ class PersistentDataSource implements NetguruValuesLocalDataSource {
   @override
   Future<int> put(NetguruValueModel value) async {
     final Database db = await instance.database;
-    return db.insert(tableValues, value.toMap());
+    return db.insert(tableValues, value.toMap(),
+        conflictAlgorithm: ConflictAlgorithm.replace);
   }
 }

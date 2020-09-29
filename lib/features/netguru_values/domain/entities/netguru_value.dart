@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
+import 'package:netguru_values/features/netguru_values/data/models/netguru_value_model.dart';
 
 class NetguruValue extends Equatable {
   final int id;
@@ -13,6 +14,15 @@ class NetguruValue extends Equatable {
     this.isFavorite = false,
     this.isDefault = false,
   });
+
+  NetguruValueModel toModel() {
+    return NetguruValueModel(
+      id: id,
+      text: text,
+      isFavorite: isFavorite,
+      isDefault: isDefault,
+    );
+  }
 
   @override
   List<Object> get props => [id, text, isFavorite, isDefault];
