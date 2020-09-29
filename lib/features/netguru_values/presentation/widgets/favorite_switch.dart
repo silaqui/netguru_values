@@ -13,15 +13,7 @@ class _FavoriteSwitchState extends State<FavoriteSwitch> {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      onPressed: () {
-        toggleState = !toggleState;
-        context.bloc<NetguruValuesBloc>().add(
-              toggleState
-                  ? GetRandomFavoriteNetguruValueEvent()
-                  : GetRandomNetguruValueEvent(),
-            );
-        setState(() {});
-      },
+      onPressed: () => onPress(),
       child: AnimatedSwitcher(
         duration: const Duration(milliseconds: 200),
         transitionBuilder: (child, animation) => ScaleTransition(
@@ -39,5 +31,15 @@ class _FavoriteSwitchState extends State<FavoriteSwitch> {
               ),
       ),
     );
+  }
+
+  void onPress() {
+    toggleState = !toggleState;
+    context.bloc<NetguruValuesBloc>().add(
+          toggleState
+              ? GetRandomFavoriteNetguruValueEvent()
+              : GetRandomNetguruValueEvent(),
+        );
+    setState(() {});
   }
 }

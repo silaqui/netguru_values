@@ -2,8 +2,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:netguru_values/features/netguru_values/presentation/bloc/netguru_values/netguru_values_bloc.dart';
-import 'package:netguru_values/features/netguru_values/presentation/widgets/expandable_fab.dart';
-import 'package:netguru_values/features/netguru_values/presentation/widgets/favorite_switch.dart';
+import 'package:netguru_values/features/netguru_values/presentation/widgets/circular_button.dart';
+import 'package:netguru_values/features/netguru_values/presentation/widgets/expandable_fab_radio.dart';
+import 'package:netguru_values/features/netguru_values/presentation/widgets/favorite_switch_radial.dart';
 import 'package:netguru_values/features/netguru_values/presentation/widgets/values_body.dart';
 import 'package:netguru_values/features/routes/router.gr.dart';
 
@@ -41,11 +42,11 @@ class NetguruValuesPage extends StatelessWidget {
           ],
         ),
         body: ValuesBody(),
-        floatingActionButton: ExpandableFab(
+        floatingActionButton: ExpandableFabRadial(
           children: <Widget>[
-            add(context),
-            valueList(context),
-            FavoriteSwitch(),
+            addRadial(context),
+            valueListRadial(context),
+            FavoriteSwitchRadial(),
           ],
         ),
       ),
@@ -71,4 +72,37 @@ class NetguruValuesPage extends StatelessWidget {
     );
   }
 
+  Widget addRadial(BuildContext context) {
+    return CircularButton(
+      color: Theme
+          .of(context)
+          .secondaryHeaderColor,
+      child: IconButton(
+          icon: Icon(
+            Icons.add,
+            color: Theme
+                .of(context)
+                .primaryColor,
+          ),
+          onPressed: () =>
+              ExtendedNavigator.of(context).push(Routes.addValuePage)),
+    );
+  }
+
+  Widget valueListRadial(BuildContext context) {
+    return CircularButton(
+      color: Theme
+          .of(context)
+          .secondaryHeaderColor,
+      child: IconButton(
+          icon: Icon(
+            Icons.list,
+            color: Theme
+                .of(context)
+                .primaryColor,
+          ),
+          onPressed: () =>
+              ExtendedNavigator.of(context).push(Routes.netguruValuesListPage)),
+    );
+  }
 }

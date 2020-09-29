@@ -27,7 +27,7 @@ class NetguruValuesBloc extends Bloc<NetguruValuesEvent, NetguruValuesState> {
   Stream<Either<Failure, NetguruValue>> getRandomValuesStream() async* {
     while (true) {
       yield await _getRandom(NoParams());
-      await Future.delayed(const Duration(seconds: 5));
+      await Future.delayed(const Duration(seconds: 2));
     }
   }
 

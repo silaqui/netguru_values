@@ -9,6 +9,12 @@ class ValuesBody extends StatelessWidget {
     return BlocBuilder<NetguruValuesBloc, NetguruValuesState>(
       builder: (BuildContext context, NetguruValuesState state) {
         return AnimatedSwitcher(
+          transitionBuilder: (Widget child, Animation<double> animation) {
+            return ScaleTransition(
+              scale: animation,
+              child: child,
+            );
+          },
           duration: const Duration(milliseconds: 500),
           child: _buildPage(context, state),
         );
