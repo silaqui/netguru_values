@@ -1,12 +1,11 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:netguru_values/features/netguru_values/presentation/bloc/netguru_values/netguru_values_bloc.dart';
-import 'package:netguru_values/features/netguru_values/presentation/widgets/circular_button.dart';
-import 'package:netguru_values/features/netguru_values/presentation/widgets/expandable_fab_radio.dart';
-import 'package:netguru_values/features/netguru_values/presentation/widgets/favorite_switch_radial.dart';
+import 'package:netguru_values/features/netguru_values/presentation/widgets/radial_expandable_fab/extra_fab_buttons_radial.dart';
 import 'package:netguru_values/features/netguru_values/presentation/widgets/values_body.dart';
-import 'package:netguru_values/features/routes/router.gr.dart';
+
+import 'file:///C:/git/netguru_values/lib/features/netguru_values/presentation/widgets/radial_expandable_fab/expandable_fab_radial.dart';
+import 'file:///C:/git/netguru_values/lib/features/netguru_values/presentation/widgets/radial_expandable_fab/favorite_switch_radial.dart';
 
 import '../../../../dependency_injection.dart';
 
@@ -50,59 +49,6 @@ class NetguruValuesPage extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-
-  Widget add(BuildContext context) {
-    return FloatingActionButton(
-      onPressed: () => ExtendedNavigator.of(context).push(Routes.addValuePage),
-      tooltip: 'Add Your Value',
-      heroTag: 'Add Your Value',
-      child: Icon(Icons.add),
-    );
-  }
-
-  Widget valueList(BuildContext context) {
-    return FloatingActionButton(
-      onPressed: () =>
-          ExtendedNavigator.of(context).push(Routes.netguruValuesListPage),
-      tooltip: 'All Our Values',
-      heroTag: 'All Our Values',
-      child: Icon(Icons.list),
-    );
-  }
-
-  Widget addRadial(BuildContext context) {
-    return CircularButton(
-      color: Theme
-          .of(context)
-          .secondaryHeaderColor,
-      child: IconButton(
-          icon: Icon(
-            Icons.add,
-            color: Theme
-                .of(context)
-                .primaryColor,
-          ),
-          onPressed: () =>
-              ExtendedNavigator.of(context).push(Routes.addValuePage)),
-    );
-  }
-
-  Widget valueListRadial(BuildContext context) {
-    return CircularButton(
-      color: Theme
-          .of(context)
-          .secondaryHeaderColor,
-      child: IconButton(
-          icon: Icon(
-            Icons.list,
-            color: Theme
-                .of(context)
-                .primaryColor,
-          ),
-          onPressed: () =>
-              ExtendedNavigator.of(context).push(Routes.netguruValuesListPage)),
     );
   }
 }
