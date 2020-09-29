@@ -47,15 +47,17 @@ class ValuesBody extends StatelessWidget {
 
   Widget _noValueMessage(BuildContext context) {
     return Center(
-        child: Padding(
-            padding: const EdgeInsets.all(40.0),
-            child: Text(
-              "We could not get value for you",
-              style: TextStyle(
-                fontSize: 25,
-                color: Color(Theme.of(context).accentColor.value),
-              ),
-              textAlign: TextAlign.center,
-            )));
+      child: Padding(
+        padding: const EdgeInsets.all(40.0),
+        child: Text(
+          "We could not get value for you",
+          style: TextStyle(
+            fontSize: 25,
+            color: Color(Theme.of(context).accentColor.value),
+          ),
+          textAlign: TextAlign.center,
+        ),
+      ),
+    );
   }
 }
