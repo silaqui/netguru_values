@@ -16,6 +16,7 @@ class ValueDisplay extends StatelessWidget {
         padding: EdgeInsets.all(40.0),
         child: Text(
           netguruValue.text,
+          key: Key('value text field'),
           style: TextStyle(fontSize: 25),
           textAlign: TextAlign.center,
         ),
