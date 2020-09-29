@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:netguru_values/features/netguru_values/presentation/bloc/netguru_values/netguru_values_bloc.dart';
 import 'package:netguru_values/features/netguru_values/presentation/widgets/expandable_fab.dart';
+import 'package:netguru_values/features/netguru_values/presentation/widgets/favorite_switch.dart';
 import 'package:netguru_values/features/netguru_values/presentation/widgets/values_body.dart';
 import 'package:netguru_values/features/routes/router.gr.dart';
 
@@ -28,7 +29,7 @@ class NetguruValuesPage extends StatelessWidget {
                         ? Icons.favorite
                         : Icons.favorite_border),
                     onPressed: () {
-                      bloc.add(ToggleFavoriteNetguruValuesEvent(value));
+//                      bloc.add(ToggleFavoriteNetguruValuesEvent(value));
                     },
                   );
                 } else {
@@ -43,7 +44,7 @@ class NetguruValuesPage extends StatelessWidget {
           children: <Widget>[
             add(context),
             valueList(context),
-            toggleOnlyFavorite(context)
+            FavoriteSwitch(),
           ],
         ),
       ),
@@ -69,13 +70,4 @@ class NetguruValuesPage extends StatelessWidget {
     );
   }
 
-  Widget toggleOnlyFavorite(BuildContext context) {
-    return FloatingActionButton(
-      onPressed: () => BlocProvider.of<NetguruValuesBloc>(context)
-          .add(GetRandomFavoriteNetguruValueEvent()),
-      tooltip: 'Show Favorite',
-      heroTag: 'Show Favorite',
-      child: Icon(Icons.favorite_border),
-    );
-  }
 }

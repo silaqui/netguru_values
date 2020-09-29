@@ -14,14 +14,12 @@ void main() {
 
   MockGetRandomNetguruValue getRandom;
   MockGetRandomFavoriteNetguruValue getRandomFavorite;
-  MockToggleFavoriteNetguruValue toggleFavorite;
 
   setUp(() {
     getRandom = MockGetRandomNetguruValue();
     getRandomFavorite = MockGetRandomFavoriteNetguruValue();
-    toggleFavorite = MockToggleFavoriteNetguruValue();
 
-    tested = NetguruValuesBloc(getRandom, getRandomFavorite, toggleFavorite);
+    tested = NetguruValuesBloc(getRandom, getRandomFavorite);
   });
 
   test('initial state should be Initial', () {
@@ -101,8 +99,8 @@ void main() {
         final expected = [
           Loaded(value: testValue),
         ];
-        when(getRandomFavorite(any)).thenAnswer((_) async =>
-        const Right(testValue));
+        when(getRandomFavorite(any))
+            .thenAnswer((_) async => const Right(testValue));
         // when
         tested.add(GetRandomFavoriteNetguruValueEvent());
         // then

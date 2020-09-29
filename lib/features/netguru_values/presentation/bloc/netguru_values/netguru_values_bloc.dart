@@ -9,7 +9,6 @@ import 'package:netguru_values/core/usecases/usecase.dart';
 import 'package:netguru_values/features/netguru_values/domain/entities/netguru_value.dart';
 import 'package:netguru_values/features/netguru_values/domain/usecases/get_random_favorite_netguru_value.dart';
 import 'package:netguru_values/features/netguru_values/domain/usecases/get_random_netguru_value.dart';
-import 'package:netguru_values/features/netguru_values/domain/usecases/toggle_favorite_netguru_value.dart';
 
 part 'netguru_values_event.dart';
 part 'netguru_values_state.dart';
@@ -17,47 +16,48 @@ part 'netguru_values_state.dart';
 class NetguruValuesBloc extends Bloc<NetguruValuesEvent, NetguruValuesState> {
   final GetRandomNetguruValue _getRandom;
   final GetRandomFavoriteNetguruValue _getRandomFavorite;
-  final ToggleFavoriteNetguruValue _toggleFavorite;
 
   NetguruValuesBloc(
     this._getRandom,
     this._getRandomFavorite,
-    this._toggleFavorite,
   ) : super(Initial());
+
+  StreamSubscription<Either<Failure, NetguruValue>> _streamSubscription;
+
+  Stream<Either<Failure, NetguruValue>> getRandomValuesStream() async* {
+    while (true) {
+      yield await _getRandom(NoParams());
+      await Future.delayed(const Duration(seconds: 5));
+    }
+  }
+
+  Stream<Either<Failure, NetguruValue>> getRandomFavoriteValuesStream() async* {
+    while (true) {
+      yield await _getRandomFavorite(NoParams());
+      await Future.delayed(const Duration(seconds: 5));
+    }
+  }
 
   @override
   Stream<NetguruValuesState> mapEventToState(
     NetguruValuesEvent event,
   ) async* {
     if (event is GetRandomNetguruValueEvent) {
-      final eitherRandomOrFailure = await _getRandom(NoParams());
-      yield* _eitherValueOrErrorState(eitherRandomOrFailure);
+      await _streamSubscription?.cancel();
+      _streamSubscription = getRandomValuesStream().listen((event) {
+        add(ValueReceived(event));
+      });
     } else if (event is GetRandomFavoriteNetguruValueEvent) {
-      final eitherRandomOrFailure = await _getRandomFavorite(NoParams());
-      yield* _eitherValueOrErrorState(eitherRandomOrFailure);
-    } else if (event is ToggleFavoriteNetguruValuesEvent) {
-      final eitherValuesOrFailure = await _toggleFavorite(event.value);
-      yield* _eitherUpdatedOrErrorState(eitherValuesOrFailure);
+      await _streamSubscription?.cancel();
+      _streamSubscription = getRandomFavoriteValuesStream().listen((event) {
+        add(ValueReceived(event));
+      });
+    } else if (event is ValueReceived) {
+      yield event.value.fold(
+          (failure) => Error(message: _mapFailureToMessage(failure)),
+          (value) => Loaded(value: value));
     }
   }
-}
-
-Stream<NetguruValuesState> _eitherValueOrErrorState(
-  Either<Failure, NetguruValue> failureOrValues,
-) async* {
-  yield failureOrValues.fold(
-    (failure) => Error(message: _mapFailureToMessage(failure)),
-    (value) => Loaded(value: value),
-  );
-}
-
-Stream<NetguruValuesState> _eitherUpdatedOrErrorState(
-  Either<Failure, int> failureOrValues,
-) async* {
-  yield failureOrValues.fold(
-    (failure) => Error(message: _mapFailureToMessage(failure)),
-    (value) => Updated(value: value),
-  );
 }
 
 String _mapFailureToMessage(Failure failure) {
