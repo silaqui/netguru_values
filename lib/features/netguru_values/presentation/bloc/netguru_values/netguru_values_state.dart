@@ -8,6 +8,8 @@ abstract class NetguruValuesState extends Equatable {
 
 class Initial extends NetguruValuesState {}
 
+class Loading extends NetguruValuesState {}
+
 class Loaded extends NetguruValuesState {
   final NetguruValue value;
 

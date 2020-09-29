@@ -14,6 +14,16 @@ class ValuesBody extends StatelessWidget {
           return Container();
         } else if (state is Loaded) {
           return ValueDisplay(netguruValue: state.value);
+        } else if (state is Error) {
+          return const Center(
+              child: Padding(
+            padding: EdgeInsets.all(40.0),
+            child: Text(
+              "We could not get value for you",
+              style: TextStyle(fontSize: 25),
+              textAlign: TextAlign.center,
+            ),
+          ));
         } else {
           return const Center(child: CircularProgressIndicator());
         }

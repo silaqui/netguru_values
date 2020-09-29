@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:netguru_values/core/error/exceptions.dart';
 import 'package:netguru_values/features/netguru_values/data/datasource/core_values.dart';
 import 'package:netguru_values/features/netguru_values/data/datasource/netguru_values_local_datasource.dart';
 import 'package:netguru_values/features/netguru_values/data/models/netguru_value_model.dart';
@@ -64,8 +65,10 @@ class PersistentDataSource implements NetguruValuesLocalDataSource {
   Future<NetguruValueModel> getRandom() async {
     final Database db = await instance.database;
     final List<Map<String, dynamic>> maps = await db.query(tableValues);
-    int i;
-    i = rng.nextInt(maps.length);
+    if (maps.isEmpty) {
+      throw MemoryException();
+    }
+    final int i = rng.nextInt(maps.length);
     return NetguruValueModel.fromMap(maps[i]);
   }
 
@@ -73,9 +76,11 @@ class PersistentDataSource implements NetguruValuesLocalDataSource {
   Future<NetguruValueModel> getRandomFavorite() async {
     final Database db = await instance.database;
     final List<Map<String, dynamic>> maps =
-    await db.query(tableValues, where: "isFavorite = 1");
-    int i;
-    i = rng.nextInt(maps.length);
+        await db.query(tableValues, where: "isFavorite = 1");
+    if (maps.isEmpty) {
+      throw MemoryException();
+    }
+    final int i = rng.nextInt(maps.length);
     return NetguruValueModel.fromMap(maps[i]);
   }
 

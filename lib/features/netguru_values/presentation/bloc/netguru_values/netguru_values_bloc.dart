@@ -43,11 +43,13 @@ class NetguruValuesBloc extends Bloc<NetguruValuesEvent, NetguruValuesState> {
     NetguruValuesEvent event,
   ) async* {
     if (event is GetRandomNetguruValueEvent) {
+      yield Loading();
       await _streamSubscription?.cancel();
       _streamSubscription = getRandomValuesStream().listen((event) {
         add(ValueReceived(event));
       });
     } else if (event is GetRandomFavoriteNetguruValueEvent) {
+      yield Loading();
       await _streamSubscription?.cancel();
       _streamSubscription = getRandomFavoriteValuesStream().listen((event) {
         add(ValueReceived(event));
