@@ -133,7 +133,7 @@ void main() {
     'put NetguruValues',
     () {
       const NetguruValue input = NetguruValueModel(text: 'Be bra ...');
-      const newValueInDataSource = 3;
+      const newValueInDataSource = NetguruValueModel(id: 3, text: 'Be bra ...');
 
       test(
         'should succeed using local data source',

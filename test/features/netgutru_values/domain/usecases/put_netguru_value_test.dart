@@ -18,7 +18,7 @@ void main() {
   });
 
   const testInput = NetguruValue(text: 'test', isFavorite: true);
-  const newIdFromDatabase = 1;
+  const newIdFromDatabase = NetguruValue(id: 1, text: 'test', isFavorite: true);
 
   test(
     'should put the Value in the repository',

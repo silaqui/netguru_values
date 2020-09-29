@@ -9,5 +9,5 @@ abstract class NetguruValuesRepository {
 
   Future<Either<Failure, List<NetguruValue>>> getAll();
 
-  Future<Either<Failure, int>> put(NetguruValue value);
+  Future<Either<Failure, NetguruValue>> put(NetguruValue value);
 }

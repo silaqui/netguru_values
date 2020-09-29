@@ -4,13 +4,13 @@ import 'package:netguru_values/core/usecases/usecase.dart';
 import 'package:netguru_values/features/netguru_values/domain/entities/netguru_value.dart';
 import 'package:netguru_values/features/netguru_values/domain/repositories/netguru_values_repository.dart';
 
-class PutNetguruValue implements UseCase<int, NetguruValue> {
+class PutNetguruValue implements UseCase<NetguruValue, NetguruValue> {
   final NetguruValuesRepository repository;
 
   PutNetguruValue(this.repository);
 
   @override
-  Future<Either<Failure, int>> call(NetguruValue params) async {
+  Future<Either<Failure, NetguruValue>> call(NetguruValue params) async {
     return repository.put(params);
   }
 }

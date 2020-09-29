@@ -7,5 +7,5 @@ abstract class NetguruValuesLocalDataSource {
 
   Future<List<NetguruValueModel>> getAll();
 
-  Future<int> put(NetguruValueModel value);
+  Future<NetguruValueModel> put(NetguruValueModel value);
 }

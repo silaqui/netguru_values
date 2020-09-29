@@ -30,7 +30,7 @@ class NetguruValuesPage extends StatelessWidget {
                         ? Icons.favorite
                         : Icons.favorite_border),
                     onPressed: () {
-//                      bloc.add(ToggleFavoriteNetguruValuesEvent(value));
+                      bloc.add(ToggleFavoriteNetguruValuesEvent(value));
                     },
                   );
                 } else {

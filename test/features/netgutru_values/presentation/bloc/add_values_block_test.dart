@@ -25,7 +25,7 @@ void main() {
 
   group('SaveNewValueEvent', () {
     const testValue = NetguruValueModel(text: 'test');
-    const savedTestValue = 1;
+    const savedTestValue = NetguruValueModel(id: 1, text: 'test');
 
     test(
       'should save new value using use case',

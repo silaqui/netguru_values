@@ -9,6 +9,7 @@ import 'package:netguru_values/core/usecases/usecase.dart';
 import 'package:netguru_values/features/netguru_values/domain/entities/netguru_value.dart';
 import 'package:netguru_values/features/netguru_values/domain/usecases/get_random_favorite_netguru_value.dart';
 import 'package:netguru_values/features/netguru_values/domain/usecases/get_random_netguru_value.dart';
+import 'package:netguru_values/features/netguru_values/domain/usecases/toggle_favorite_netguru_value.dart';
 
 part 'netguru_values_event.dart';
 part 'netguru_values_state.dart';
@@ -16,10 +17,12 @@ part 'netguru_values_state.dart';
 class NetguruValuesBloc extends Bloc<NetguruValuesEvent, NetguruValuesState> {
   final GetRandomNetguruValue _getRandom;
   final GetRandomFavoriteNetguruValue _getRandomFavorite;
+  final ToggleFavoriteNetguruValue _toggleFavorite;
 
   NetguruValuesBloc(
     this._getRandom,
     this._getRandomFavorite,
+    this._toggleFavorite,
   ) : super(Initial());
 
   StreamSubscription<Either<Failure, NetguruValue>> _streamSubscription;
@@ -56,8 +59,12 @@ class NetguruValuesBloc extends Bloc<NetguruValuesEvent, NetguruValuesState> {
       });
     } else if (event is ValueReceived) {
       yield event.value.fold(
-          (failure) => Error(message: _mapFailureToMessage(failure)),
-          (value) => Loaded(value: value));
+              (failure) => Error(message: _mapFailureToMessage(failure)),
+              (value) => Loaded(value: value));
+    } else if (event is ToggleFavoriteNetguruValuesEvent) {
+      yield (await _toggleFavorite(event.value)).fold(
+              (failure) => Error(message: _mapFailureToMessage(failure)),
+              (value) => Loaded(value: value));
     }
   }
 }

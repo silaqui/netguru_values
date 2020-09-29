@@ -14,12 +14,14 @@ void main() {
 
   MockGetRandomNetguruValue getRandom;
   MockGetRandomFavoriteNetguruValue getRandomFavorite;
+  MockToggleFavoriteNetguruValue toggleFavoriteNetguruValue;
 
   setUp(() {
     getRandom = MockGetRandomNetguruValue();
     getRandomFavorite = MockGetRandomFavoriteNetguruValue();
 
-    tested = NetguruValuesBloc(getRandom, getRandomFavorite);
+    tested = NetguruValuesBloc(
+        getRandom, getRandomFavorite, toggleFavoriteNetguruValue);
   });
 
   test('initial state should be Initial', () {
@@ -45,10 +47,11 @@ void main() {
     );
 
     test(
-      'should emit [Loaded] when data is gotten successfully',
-          () async {
+      'should emit [Loading Loaded] when data is gotten successfully',
+      () async {
         // given
         final expected = [
+          Loading(),
           Loaded(value: testValue),
         ];
         when(getRandom(any)).thenAnswer((_) async => const Right(testValue));
@@ -60,10 +63,11 @@ void main() {
     );
 
     test(
-      'should emit [Error] when getting data fails',
+      'should emit [Loading Error] when getting data fails',
           () async {
         // given
         final expected = [
+          Loading(),
           Error(message: memoryFailureMessage),
         ];
         when(getRandom(any)).thenAnswer((_) async => Left(MemoryFailure()));
@@ -93,10 +97,11 @@ void main() {
     );
 
     test(
-      'should emit [Loaded] when data is gotten successfully',
+      'should emit [Loading Loaded] when data is gotten successfully',
           () async {
         // given
         final expected = [
+          Loading(),
           Loaded(value: testValue),
         ];
         when(getRandomFavorite(any))
@@ -109,10 +114,11 @@ void main() {
     );
 
     test(
-      'should emit [Error] when getting data fails',
+      'should emit [Loading Error] when getting data fails',
           () async {
         // given
         final expected = [
+          Loading(),
           Error(message: memoryFailureMessage),
         ];
         when(getRandomFavorite(any))

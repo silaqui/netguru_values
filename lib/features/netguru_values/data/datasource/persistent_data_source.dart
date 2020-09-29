@@ -76,7 +76,7 @@ class PersistentDataSource implements NetguruValuesLocalDataSource {
   Future<NetguruValueModel> getRandomFavorite() async {
     final Database db = await instance.database;
     final List<Map<String, dynamic>> maps =
-        await db.query(tableValues, where: "isFavorite = 1");
+    await db.query(tableValues, where: "isFavorite = 1");
     if (maps.isEmpty) {
       throw MemoryException();
     }
@@ -85,9 +85,13 @@ class PersistentDataSource implements NetguruValuesLocalDataSource {
   }
 
   @override
-  Future<int> put(NetguruValueModel value) async {
+  Future<NetguruValueModel> put(NetguruValueModel value) async {
     final Database db = await instance.database;
-    return db.insert(tableValues, value.toMap(),
+    final int id = await db.insert(tableValues, value.toMap(),
         conflictAlgorithm: ConflictAlgorithm.replace);
+    return NetguruValueModel(id: id,
+        text: value.text,
+        isFavorite: value.isFavorite,
+        isDefault: value.isDefault);
   }
 }

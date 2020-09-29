@@ -16,7 +16,7 @@ import 'features/netguru_values/presentation/bloc/netguru_values_list/netguru_va
 final GetIt getIt = GetIt.instance;
 
 Future<void> init() async {
-  getIt.registerFactory(() => NetguruValuesBloc(getIt(), getIt()));
+  getIt.registerFactory(() => NetguruValuesBloc(getIt(), getIt(), getIt()));
   getIt.registerFactory(() => NetguruValuesListBloc(getIt()));
   getIt.registerFactory(() => AddValueBloc(getIt()));
 

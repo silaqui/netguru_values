@@ -6,6 +6,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:netguru_values/core/error/failures.dart';
 import 'package:netguru_values/features/netguru_values/data/models/netguru_value_model.dart';
+import 'package:netguru_values/features/netguru_values/domain/entities/netguru_value.dart';
 import 'package:netguru_values/features/netguru_values/domain/usecases/put_netguru_value.dart';
 
 part 'add_value_event.dart';
@@ -29,7 +30,7 @@ class AddValueBloc extends Bloc<AddValueEvent, AddValueState> {
   }
 
   Stream<AddValueState> _eitherValueOrErrorState(
-    Either<Failure, int> failureOrValues,
+    Either<Failure, NetguruValue> failureOrValues,
   ) async* {
     yield failureOrValues.fold(
       (failure) => Error(message: _mapFailureToMessage(failure)),

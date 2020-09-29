@@ -19,18 +19,18 @@ void main() {
 
   const testInput = NetguruValue(id: 1, text: 'test');
   const testFavoriteInput = NetguruValue(id: 1, text: 'test', isFavorite: true);
-  const idFromDatabase = 1;
+  const valueFromDatabase = NetguruValue(id: 1, text: 'test', isFavorite: true);
 
   test(
     'should put the Value in the repository',
     () async {
       // given
       when(mockRepository.put(testFavoriteInput))
-          .thenAnswer((_) async => const Right(idFromDatabase));
+          .thenAnswer((_) async => const Right(valueFromDatabase));
       // when
       final actual = await tested(testInput);
       // then
-      expect(actual, const Right(idFromDatabase));
+      expect(actual, const Right(valueFromDatabase));
       verify(mockRepository.put(testFavoriteInput));
       verifyNoMoreInteractions(mockRepository);
     },

@@ -39,7 +39,7 @@ class MapLocalDataSource implements NetguruValuesLocalDataSource {
   }
 
   @override
-  Future<int> put(NetguruValueModel input) {
+  Future<NetguruValueModel> put(NetguruValueModel input) {
     var saveInput = input;
     if (saveInput.id == null) {
       saveInput = NetguruValueModel(
@@ -48,6 +48,6 @@ class MapLocalDataSource implements NetguruValuesLocalDataSource {
           isFavorite: input.isFavorite);
     }
     storageMap[saveInput.id] = saveInput;
-    return Future.value(saveInput.id);
+    return Future.value(saveInput);
   }
 }
