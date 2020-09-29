@@ -1,0 +1,86 @@
+import 'dart:math';
+
+import 'package:netguru_values/features/netguru_values/data/datasource/core_values.dart';
+import 'package:netguru_values/features/netguru_values/data/datasource/netguru_values_local_datasource.dart';
+import 'package:netguru_values/features/netguru_values/data/models/netguru_value_model.dart';
+import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
+
+class PersistentDataSource implements NetguruValuesLocalDataSource {
+  static final _databaseName = "netguru_values_database.db";
+  static final _databaseVersion = 1;
+
+  static final String tableValues = 'netguru';
+  static final String columnId = 'id';
+  static final String columnText = 'valueText';
+  static final String columnFavorite = 'isFavorite';
+  static final String columnDefault = 'isDefault';
+
+  var rng = new Random();
+
+  PersistentDataSource._privateConstructor();
+
+  static final PersistentDataSource instance =
+      PersistentDataSource._privateConstructor();
+
+  Database _database;
+
+  Future<Database> get database async {
+    if (_database != null) return _database;
+    _database = await _initDatabase();
+    return _database;
+  }
+
+  _initDatabase() async {
+    String path = join(await getDatabasesPath(), _databaseName);
+    return await openDatabase(path,
+        version: _databaseVersion, onCreate: _onCreate);
+  }
+
+  Future _onCreate(Database db, int version) async {
+    await db.execute('''
+          CREATE TABLE $tableValues (
+          $columnId INTEGER PRIMARY KEY AUTOINCREMENT,
+          $columnText TEXT DEFAULT '',
+          $columnFavorite INTEGER DEFAULT 0,
+          $columnDefault INTEGER DEFAULT 0
+          )
+          ''');
+
+    for (NetguruValueModel v in coreValues.values) {
+      db.insert(tableValues, v.toMap());
+    }
+  }
+
+  @override
+  Future<List<NetguruValueModel>> getAll() async {
+    Database db = await instance.database;
+    List<Map> maps = await db.query(tableValues);
+    return List.generate(maps.length, (i) {
+      return NetguruValueModel.fromMap(maps[i]);
+    });
+  }
+
+  @override
+  Future<NetguruValueModel> getRandom() async {
+    Database db = await instance.database;
+    final List<Map<String, dynamic>> maps = await db.query(tableValues);
+    int i = rng.nextInt(maps.length);
+    return NetguruValueModel.fromMap(maps[i]);
+  }
+
+  @override
+  Future<NetguruValueModel> getRandomFavorite() async {
+    Database db = await instance.database;
+    final List<Map<String, dynamic>> maps =
+        await db.query(tableValues, where: "isFavorite = 1");
+    int i = rng.nextInt(maps.length);
+    return NetguruValueModel.fromMap(maps[i]);
+  }
+
+  @override
+  Future<int> put(NetguruValueModel value) async {
+    Database db = await instance.database;
+    return db.insert(tableValues, value.toMap());
+  }
+}

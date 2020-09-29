@@ -134,9 +134,7 @@ void main() {
     () {
       final NetguruValue input =
           NetguruValueModel(id: null, text: 'Be bra ...', isFavorite: false);
-      final NetguruValueModel newValueInDataSource =
-          NetguruValueModel(id: 3, text: 'Be bra ...', isFavorite: false);
-      final NetguruValue output = newValueInDataSource;
+      final newValueInDataSource = 3;
 
       test(
         'should succeed using local data source',
@@ -147,7 +145,7 @@ void main() {
           // when
           final actual = await tested.put(input);
           // then
-          expect(actual, equals(Right(output)));
+          expect(actual, equals(Right(newValueInDataSource)));
           verify(mockDataSource.put(input));
           verifyNoMoreInteractions(mockDataSource);
         },

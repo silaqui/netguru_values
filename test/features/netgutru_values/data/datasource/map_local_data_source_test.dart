@@ -3,7 +3,8 @@ import 'dart:collection';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:matcher/matcher.dart';
 import 'package:netguru_values/core/error/exceptions.dart';
-import 'package:netguru_values/features/netguru_values/data/datasource/netguru_values_local_datasource.dart';
+import 'package:netguru_values/features/netguru_values/data/datasource/core_values.dart';
+import 'package:netguru_values/features/netguru_values/data/datasource/map_local_data_source.dart';
 import 'package:netguru_values/features/netguru_values/data/models/netguru_value_model.dart';
 
 void main() {
@@ -13,12 +14,12 @@ void main() {
       'should return all stored Values',
       () async {
         //given
-        tested = MapLocalDataSource(defaultStorage);
+        tested = MapLocalDataSource(coreValues);
         // when
         List<NetguruValueModel> actual = await tested.getAll();
 
         // then
-        expect(actual.length, equals(defaultStorage.length));
+        expect(actual.length, equals(coreValues.length));
       },
     );
   });
@@ -110,15 +111,14 @@ void main() {
         NetguruValueModel newValue = NetguruValueModel(
             id: null,
             text:
-                "Take ownership and question the status quo in a constructive manner",
+            "Take ownership and question the status quo in a constructive manner",
             isFavorite: true);
         var source = HashMap.of({1: existingValue});
         tested = MapLocalDataSource(source);
         // when
-        NetguruValueModel actual = await tested.put(newValue);
+        await tested.put(newValue);
 
         // then
-        expect(actual.id, equals(2));
         expect(source.length, equals(2));
       },
     );
@@ -134,12 +134,11 @@ void main() {
         var source = HashMap.of({1: existingValue});
         tested = MapLocalDataSource(source);
         // when
-        NetguruValueModel actual = await tested.put(updateExisting);
+        tested.put(updateExisting);
 
         // then
-        expect(actual, equals(updateExisting));
-        expect(actual.isFavorite, equals(true));
         expect(source.length, equals(1));
+        expect(source[1].isFavorite, equals(true));
       },
     );
   });

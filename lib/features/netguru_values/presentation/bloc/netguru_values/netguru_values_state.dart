@@ -18,7 +18,7 @@ class Loaded extends NetguruValuesState {
 }
 
 class Updated extends NetguruValuesState {
-  final NetguruValue value;
+  final int value;
 
   Updated({@required this.value});
 

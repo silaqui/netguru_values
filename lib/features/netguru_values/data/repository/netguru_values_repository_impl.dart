@@ -6,14 +6,14 @@ import 'package:netguru_values/features/netguru_values/domain/entities/netguru_v
 import 'package:netguru_values/features/netguru_values/domain/repositories/netguru_values_repository.dart';
 
 class NetguruValuesRepositoryImpl implements NetguruValuesRepository {
-  final NetguruValuesLocalDataSource localDataSource;
+  final NetguruValuesLocalDataSource dataSource;
 
-  NetguruValuesRepositoryImpl(this.localDataSource);
+  NetguruValuesRepositoryImpl(this.dataSource);
 
   @override
   Future<Either<Failure, List<NetguruValue>>> getAll() async {
     try {
-      final localValue = await localDataSource.getAll();
+      final localValue = await dataSource.getAll();
       return Right(localValue);
     } on MemoryException {
       return Left(MemoryFailure());
@@ -23,7 +23,7 @@ class NetguruValuesRepositoryImpl implements NetguruValuesRepository {
   @override
   Future<Either<Failure, NetguruValue>> getRandom() async {
     try {
-      final localValue = await localDataSource.getRandom();
+      final localValue = await dataSource.getRandom();
       return Right(localValue);
     } on MemoryException {
       return Left(MemoryFailure());
@@ -33,7 +33,7 @@ class NetguruValuesRepositoryImpl implements NetguruValuesRepository {
   @override
   Future<Either<Failure, NetguruValue>> getRandomFavorite() async {
     try {
-      final localValue = await localDataSource.getRandomFavorite();
+      final localValue = await dataSource.getRandomFavorite();
       return Right(localValue);
     } on MemoryException {
       return Left(MemoryFailure());
@@ -41,10 +41,10 @@ class NetguruValuesRepositoryImpl implements NetguruValuesRepository {
   }
 
   @override
-  Future<Either<Failure, NetguruValue>> put(NetguruValue value) async {
+  Future<Either<Failure, int>> put(NetguruValue value) async {
     try {
-      final localValue = await localDataSource.put(value);
-      return Right(localValue);
+      int id = await dataSource.put(value);
+      return Right(id);
     } on MemoryException {
       return Left(MemoryFailure());
     }

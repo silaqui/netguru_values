@@ -14,7 +14,8 @@ dependencies:
   get_it: ^5.0.1
   auto_route: ^0.6.7
   flushbar: ^1.10.4
-
+  sqflite:
+  path:
   flutter:
     sdk: flutter
 

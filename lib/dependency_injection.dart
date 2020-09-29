@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:netguru_values/features/netguru_values/data/datasource/netguru_values_local_datasource.dart';
+import 'package:netguru_values/features/netguru_values/data/datasource/persistent_data_source.dart';
 import 'package:netguru_values/features/netguru_values/data/repository/netguru_values_repository_impl.dart';
 import 'package:netguru_values/features/netguru_values/presentation/bloc/add_value/add_value_bloc.dart';
 
@@ -28,6 +29,6 @@ Future<void> init() async {
   getIt.registerLazySingleton<NetguruValuesRepository>(
       () => NetguruValuesRepositoryImpl(getIt()));
 
-  getIt.registerLazySingleton<NetguruValuesLocalDataSource>(
-      () => MapLocalDataSource(defaultStorage));
+  getIt.registerSingleton<NetguruValuesLocalDataSource>(
+      PersistentDataSource.instance);
 }

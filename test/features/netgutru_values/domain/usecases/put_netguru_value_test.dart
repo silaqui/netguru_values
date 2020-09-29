@@ -18,18 +18,18 @@ void main() {
   });
 
   final testInput = NetguruValue(id: null, text: 'test', isFavorite: true);
-  final testOutput = NetguruValue(id: 1, text: 'test', isFavorite: true);
+  final newIdFromDatabase = 1;
 
   test(
     'should put the Value in the repository',
     () async {
       // given
       when(mockRepository.put(testInput))
-          .thenAnswer((_) async => Right(testOutput));
+          .thenAnswer((_) async => Right(newIdFromDatabase));
       // when
       final actual = await tested(testInput);
       // then
-      expect(actual, Right(testOutput));
+      expect(actual, Right(newIdFromDatabase));
       verify(mockRepository.put(testInput));
       verifyNoMoreInteractions(mockRepository);
     },

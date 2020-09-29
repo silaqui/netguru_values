@@ -52,7 +52,7 @@ Stream<NetguruValuesState> _eitherValueOrErrorState(
 }
 
 Stream<NetguruValuesState> _eitherUpdatedOrErrorState(
-  Either<Failure, NetguruValue> failureOrValues,
+  Either<Failure, int> failureOrValues,
 ) async* {
   yield failureOrValues.fold(
     (failure) => Error(message: _mapFailureToMessage(failure)),

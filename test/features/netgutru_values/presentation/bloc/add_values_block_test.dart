@@ -3,7 +3,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:netguru_values/core/error/failures.dart';
 import 'package:netguru_values/features/netguru_values/data/models/netguru_value_model.dart';
-import 'package:netguru_values/features/netguru_values/domain/entities/netguru_value.dart';
 import 'package:netguru_values/features/netguru_values/presentation/bloc/add_value/add_value_bloc.dart';
 
 import 'use_cases_mocks.dart';
@@ -26,7 +25,7 @@ void main() {
 
   group('SaveNewValueEvent', () {
     final testValue = NetguruValueModel(text: 'test');
-    final savedTestValue = NetguruValue(id: 1, text: 'test');
+    final savedTestValue = 1;
 
     test(
       'should save new value using use case',
@@ -50,7 +49,8 @@ void main() {
           Saving(),
           Saved(),
         ];
-        when(putNetguruValue(any)).thenAnswer((_) async => Right(testValue));
+        when(putNetguruValue(any)).thenAnswer((_) async =>
+            Right(savedTestValue));
         // when
         tested.add(SaveNewValueEvent('test'));
         // then
