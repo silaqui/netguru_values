@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-final lightTheme = ThemeData(
+final ThemeData lightTheme = ThemeData(
   primarySwatch: Colors.green,
   visualDensity: VisualDensity.adaptivePlatformDensity,
   fontFamily: 'Comfortaa',
 );
 
-final darkTheme = ThemeData(
+final ThemeData darkTheme = ThemeData(
   brightness: Brightness.dark,
   fontFamily: 'Comfortaa',
 );

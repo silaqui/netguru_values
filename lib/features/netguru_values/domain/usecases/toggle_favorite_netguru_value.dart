@@ -11,8 +11,8 @@ class ToggleFavoriteNetguruValue implements UseCase<int, NetguruValue> {
 
   @override
   Future<Either<Failure, int>> call(NetguruValue params) async {
-    var newValue = NetguruValue(
+    final newValue = NetguruValue(
         id: params.id, text: params.text, isFavorite: params.isFavorite);
-    return await repository.put(newValue);
+    return repository.put(newValue);
   }
 }

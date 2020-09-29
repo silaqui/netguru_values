@@ -13,7 +13,7 @@ class ValuesListBody extends StatelessWidget {
           if (state is Empty) {
             BlocProvider.of<NetguruValuesListBloc>(context)
                 .add(GetAllNetguruValuesEvent());
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (state is LoadedList) {
             return ListView.builder(
               itemCount: state.value.length,
@@ -22,7 +22,7 @@ class ValuesListBody extends StatelessWidget {
                 return Card(
                   child: ListTile(
                     leading: item.isDefault
-                        ? Image(image: AssetImage('assets/icon/icon.png'))
+                        ? const Image(image: AssetImage('assets/icon/icon.png'))
                         : null,
                     title: Text(item.text),
                     trailing: Icon(item.isFavorite

@@ -13,11 +13,11 @@ class ValueDisplay extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Padding(
-        padding: EdgeInsets.all(40.0),
+        padding: const EdgeInsets.all(40.0),
         child: Text(
           netguruValue.text,
-          key: Key('value text field'),
-          style: TextStyle(fontSize: 25),
+          key: const Key('value text field'),
+          style: const TextStyle(fontSize: 25),
           textAlign: TextAlign.center,
         ),
       ),

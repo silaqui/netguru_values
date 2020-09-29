@@ -25,7 +25,9 @@ void main() {
   });
 
   group('GetAllNetguruValuesEvent', () {
-    final testValue = [NetguruValue(id: 1, text: 'test', isFavorite: true)];
+    final testValue = [
+      const NetguruValue(id: 1, text: 'test', isFavorite: true)
+    ];
 
     test(
       'should get data from the get all use case',
@@ -60,7 +62,7 @@ void main() {
       () async {
         // given
         final expected = [
-          Error(message: MEMORY_FAILURE_MESSAGE),
+          Error(message: memoryFailureMessage),
         ];
         when(getAll(any)).thenAnswer((_) async => Left(MemoryFailure()));
         // when

@@ -18,18 +18,18 @@ void main() {
     tested = GetRandomNetguruValue(mockRepository);
   });
 
-  final testValue = NetguruValue(id: 1, text: 'test', isFavorite: false);
+  const testValue = NetguruValue(id: 1, text: 'test');
 
   test(
     'should get the Value from the repository',
     () async {
       // given
       when(mockRepository.getRandom())
-          .thenAnswer((_) async => Right(testValue));
+          .thenAnswer((_) async => const Right(testValue));
       // when
       final actual = await tested(NoParams());
       // then
-      expect(actual, Right(testValue));
+      expect(actual, const Right(testValue));
       verify(mockRepository.getRandom());
       verifyNoMoreInteractions(mockRepository);
     },

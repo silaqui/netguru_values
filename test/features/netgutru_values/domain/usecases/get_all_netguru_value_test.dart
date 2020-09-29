@@ -18,7 +18,7 @@ void main() {
     tested = GetAllNetguruValue(mockRepository);
   });
 
-  final testValue = [NetguruValue(id: 1, text: 'test', isFavorite: true)];
+  final testValue = [const NetguruValue(id: 1, text: 'test', isFavorite: true)];
 
   test(
     'should get all ot the Values from the repository',

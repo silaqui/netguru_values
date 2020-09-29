@@ -16,7 +16,7 @@ void main() {
         //given
         tested = MapLocalDataSource(coreValues);
         // when
-        List<NetguruValueModel> actual = await tested.getAll();
+        final List<NetguruValueModel> actual = await tested.getAll();
 
         // then
         expect(actual.length, equals(coreValues.length));
@@ -26,10 +26,8 @@ void main() {
 
   group('get random Value', () {
     MapLocalDataSource tested;
-    NetguruValueModel value = NetguruValueModel(
-        id: 1,
-        text: "Exceed clients' and colleagues' expectations",
-        isFavorite: false);
+    const NetguruValueModel value = NetguruValueModel(
+        id: 1, text: "Exceed clients' and colleagues' expectations");
 
     test(
       'should return one Value',
@@ -37,7 +35,7 @@ void main() {
         //given
         tested = MapLocalDataSource(HashMap.of({1: value}));
         // when
-        NetguruValueModel actual = await tested.getRandom();
+        final NetguruValueModel actual = await tested.getRandom();
 
         // then
         expect(actual, equals(value));
@@ -60,23 +58,22 @@ void main() {
 
   group('get random favorite Value', () {
     MapLocalDataSource tested;
-    NetguruValueModel value = NetguruValueModel(
+    const NetguruValueModel value = NetguruValueModel(
         id: 1,
-        text: "Exceed clients' and colleagues' expectations",
-        isFavorite: false);
-    NetguruValueModel favoriteValue = NetguruValueModel(
+        text: "Exceed clients' and colleagues' expectations");
+    const NetguruValueModel favoriteValue = NetguruValueModel(
         id: 2,
         text:
-            "Take ownership and question the status quo in a constructive manner",
+        "Take ownership and question the status quo in a constructive manner",
         isFavorite: true);
 
     test(
       'should return one favorite Value at random',
-      () async {
+          () async {
         //given
         tested = MapLocalDataSource(HashMap.of({1: value, 2: favoriteValue}));
         // when
-        NetguruValueModel actual = await tested.getRandomFavorite();
+        final NetguruValueModel actual = await tested.getRandomFavorite();
 
         // then
         expect(actual, equals(favoriteValue));
@@ -99,21 +96,19 @@ void main() {
 
   group('put Value', () {
     MapLocalDataSource tested;
-    NetguruValueModel existingValue = NetguruValueModel(
+    const NetguruValueModel existingValue = NetguruValueModel(
         id: 1,
-        text: "Exceed clients' and colleagues' expectations",
-        isFavorite: false);
+        text: "Exceed clients' and colleagues' expectations");
 
     test(
       'should add new value',
-      () async {
+          () async {
         //given
-        NetguruValueModel newValue = NetguruValueModel(
-            id: null,
+        const NetguruValueModel newValue = NetguruValueModel(
             text:
             "Take ownership and question the status quo in a constructive manner",
             isFavorite: true);
-        var source = HashMap.of({1: existingValue});
+        final source = HashMap.of({1: existingValue});
         tested = MapLocalDataSource(source);
         // when
         await tested.put(newValue);
@@ -127,11 +122,11 @@ void main() {
       'should update existing value',
       () async {
         //given
-        NetguruValueModel updateExisting = NetguruValueModel(
+        const NetguruValueModel updateExisting = NetguruValueModel(
             id: 1,
             text: "Exceed clients' and colleagues' expectations",
             isFavorite: true);
-        var source = HashMap.of({1: existingValue});
+        final source = HashMap.of({1: existingValue});
         tested = MapLocalDataSource(source);
         // when
         tested.put(updateExisting);

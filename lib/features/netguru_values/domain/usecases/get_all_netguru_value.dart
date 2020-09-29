@@ -11,6 +11,6 @@ class GetAllNetguruValue implements UseCase<List<NetguruValue>, NoParams> {
 
   @override
   Future<Either<Failure, List<NetguruValue>>> call(NoParams params) async {
-    return await repository.getAll();
+    return repository.getAll();
   }
 }

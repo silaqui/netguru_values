@@ -29,7 +29,7 @@ class AddValueScaffold extends StatelessWidget {
       ),
       body: Center(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 25.0),
+          padding: const EdgeInsets.symmetric(horizontal: 25.0),
           child: TextField(
             controller: _textController,
             keyboardType: TextInputType.multiline,
@@ -37,8 +37,8 @@ class AddValueScaffold extends StatelessWidget {
             maxLines: 10,
             maxLength: 500,
             maxLengthEnforced: true,
-            decoration: InputDecoration(
-                border: const OutlineInputBorder(),
+            decoration: const InputDecoration(
+                border: OutlineInputBorder(),
                 hintText: "Tell us what matters to you."),
           ),
         ),

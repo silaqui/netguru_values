@@ -21,7 +21,7 @@ class AddValueBloc extends Bloc<AddValueEvent, AddValueState> {
     AddValueEvent event,
   ) async* {
     if (event is SaveNewValueEvent) {
-      var newValue = NetguruValueModel(text: event.netguruValueText);
+      final newValue = NetguruValueModel(text: event.netguruValueText);
       yield Saving();
       final eitherSavedOrFailure = await _putNetguruValue(newValue);
       yield* _eitherValueOrErrorState(eitherSavedOrFailure);
@@ -40,7 +40,7 @@ class AddValueBloc extends Bloc<AddValueEvent, AddValueState> {
   String _mapFailureToMessage(Failure failure) {
     switch (failure.runtimeType) {
       case MemoryFailure:
-        return MEMORY_FAILURE_MESSAGE;
+        return memoryFailureMessage;
       default:
         return 'Unexpected error';
     }

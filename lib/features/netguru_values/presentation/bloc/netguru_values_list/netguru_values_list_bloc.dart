@@ -10,7 +10,6 @@ import 'package:netguru_values/features/netguru_values/domain/entities/netguru_v
 import 'package:netguru_values/features/netguru_values/domain/usecases/get_all_netguru_value.dart';
 
 part 'netguru_values_list_event.dart';
-
 part 'netguru_values_list_state.dart';
 
 class NetguruValuesListBloc
@@ -41,7 +40,7 @@ class NetguruValuesListBloc
   String _mapFailureToMessage(Failure failure) {
     switch (failure.runtimeType) {
       case MemoryFailure:
-        return MEMORY_FAILURE_MESSAGE;
+        return memoryFailureMessage;
       default:
         return 'Unexpected error';
     }

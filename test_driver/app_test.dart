@@ -20,7 +20,7 @@ void main() {
     test('Should show some value on screen', () async {
       //given
       //when
-      String actual = await driver.getText(valueTextField);
+      final String actual = await driver.getText(valueTextField);
       //then
       expect(actual.isNotEmpty, true);
     });

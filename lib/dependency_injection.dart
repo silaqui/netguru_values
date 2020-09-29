@@ -13,7 +13,7 @@ import 'features/netguru_values/domain/usecases/toggle_favorite_netguru_value.da
 import 'features/netguru_values/presentation/bloc/netguru_values/netguru_values_bloc.dart';
 import 'features/netguru_values/presentation/bloc/netguru_values_list/netguru_values_list_bloc.dart';
 
-final getIt = GetIt.instance;
+final GetIt getIt = GetIt.instance;
 
 Future<void> init() async {
   getIt.registerFactory(() => NetguruValuesBloc(getIt(), getIt(), getIt()));

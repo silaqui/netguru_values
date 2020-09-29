@@ -3,8 +3,7 @@ import 'package:netguru_values/features/netguru_values/data/models/netguru_value
 import 'package:netguru_values/features/netguru_values/domain/entities/netguru_value.dart';
 
 void main() {
-  final testModel =
-      NetguruValueModel(id: 1, text: 'Test Text', isFavorite: false);
+  const testModel = NetguruValueModel(id: 1, text: 'Test Text');
 
   test(
     'should be a subclass of NetguruValue entity',
@@ -18,7 +17,7 @@ void main() {
     'should toMap',
     () async {
       //when
-      Map<String, dynamic> actual = testModel.toMap();
+      final Map<String, dynamic> actual = testModel.toMap();
 
       // then
       expect(actual['id'], 1);
@@ -32,14 +31,14 @@ void main() {
     'should fromMap',
     () async {
       //given
-      Map<String, dynamic> input = {
+      final Map<String, dynamic> input = {
         'id': 5,
         'valueText': 'Test Text',
         'isFavorite': 1,
         'isDefault': 1
       };
       //when
-      NetguruValueModel actual = NetguruValueModel.fromMap(input);
+      final NetguruValueModel actual = NetguruValueModel.fromMap(input);
 
       // then
       expect(actual.id, 1);

@@ -11,6 +11,6 @@ class GetRandomNetguruValue implements UseCase<NetguruValue, NoParams> {
 
   @override
   Future<Either<Failure, NetguruValue>> call(NoParams params) async {
-    return await repository.getRandom();
+    return repository.getRandom();
   }
 }

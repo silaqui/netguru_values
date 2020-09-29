@@ -43,7 +43,8 @@ class NetguruValuesRepositoryImpl implements NetguruValuesRepository {
   @override
   Future<Either<Failure, int>> put(NetguruValue value) async {
     try {
-      int id = await dataSource.put(value);
+      int id;
+      id = await dataSource.put(value);
       return Right(id);
     } on MemoryException {
       return Left(MemoryFailure());

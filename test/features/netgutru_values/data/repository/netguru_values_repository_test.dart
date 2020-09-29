@@ -59,9 +59,9 @@ void main() {
   group(
     'get random NetguruValues',
     () {
-      final NetguruValueModel valueModel =
-          NetguruValueModel(id: 2, text: 'Take o ...', isFavorite: false);
-      final NetguruValue value = valueModel;
+      const NetguruValueModel valueModel =
+          NetguruValueModel(id: 2, text: 'Take o ...');
+      const NetguruValue value = valueModel;
 
       test(
         'should succeed using local data source',
@@ -71,7 +71,7 @@ void main() {
           // when
           final actual = await tested.getRandom();
           // then
-          expect(actual, equals(Right(value)));
+          expect(actual, equals(const Right(value)));
           verify(mockDataSource.getRandom());
           verifyNoMoreInteractions(mockDataSource);
         },
@@ -95,9 +95,9 @@ void main() {
   group(
     'get random favorite NetguruValues',
     () {
-      final NetguruValueModel favoriteValueModel =
+      const NetguruValueModel favoriteValueModel =
           NetguruValueModel(id: 1, text: 'Exceed ...', isFavorite: true);
-      final NetguruValue favoriteValue = favoriteValueModel;
+      const NetguruValue favoriteValue = favoriteValueModel;
 
       test(
         'should succeed using local data source',
@@ -108,7 +108,7 @@ void main() {
           // when
           final actual = await tested.getRandomFavorite();
           // then
-          expect(actual, equals(Right(favoriteValue)));
+          expect(actual, equals(const Right(favoriteValue)));
           verify(mockDataSource.getRandomFavorite());
           verifyNoMoreInteractions(mockDataSource);
         },
@@ -132,9 +132,8 @@ void main() {
   group(
     'put NetguruValues',
     () {
-      final NetguruValue input =
-          NetguruValueModel(id: null, text: 'Be bra ...', isFavorite: false);
-      final newValueInDataSource = 3;
+      const NetguruValue input = NetguruValueModel(text: 'Be bra ...');
+      const newValueInDataSource = 3;
 
       test(
         'should succeed using local data source',
@@ -145,7 +144,7 @@ void main() {
           // when
           final actual = await tested.put(input);
           // then
-          expect(actual, equals(Right(newValueInDataSource)));
+          expect(actual, equals(const Right(newValueInDataSource)));
           verify(mockDataSource.put(input));
           verifyNoMoreInteractions(mockDataSource);
         },

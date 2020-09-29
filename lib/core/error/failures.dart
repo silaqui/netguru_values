@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-const MEMORY_FAILURE_MESSAGE = 'Memory failure';
+const memoryFailureMessage = 'Memory failure';
 
 abstract class Failure extends Equatable {
   @override

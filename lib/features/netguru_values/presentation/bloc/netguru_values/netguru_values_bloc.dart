@@ -63,7 +63,7 @@ Stream<NetguruValuesState> _eitherUpdatedOrErrorState(
 String _mapFailureToMessage(Failure failure) {
   switch (failure.runtimeType) {
     case MemoryFailure:
-      return MEMORY_FAILURE_MESSAGE;
+      return memoryFailureMessage;
     default:
       return 'Unexpected error';
   }

@@ -7,16 +7,16 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 class PersistentDataSource implements NetguruValuesLocalDataSource {
-  static final _databaseName = "netguru_values_database.db";
-  static final _databaseVersion = 1;
+  static const String _databaseName = "netguru_values_database.db";
+  static const int _databaseVersion = 1;
 
-  static final String tableValues = 'netguru';
-  static final String columnId = 'id';
-  static final String columnText = 'valueText';
-  static final String columnFavorite = 'isFavorite';
-  static final String columnDefault = 'isDefault';
+  static const String tableValues = 'netguru';
+  static const String columnId = 'id';
+  static const String columnText = 'valueText';
+  static const String columnFavorite = 'isFavorite';
+  static const String columnDefault = 'isDefault';
 
-  var rng = new Random();
+  Random rng = Random();
 
   PersistentDataSource._privateConstructor();
 
@@ -26,15 +26,14 @@ class PersistentDataSource implements NetguruValuesLocalDataSource {
   Database _database;
 
   Future<Database> get database async {
-    if (_database != null) return _database;
-    _database = await _initDatabase();
+    // ignore: join_return_with_assignment
+    _database ??= await _initDatabase();
     return _database;
   }
 
-  _initDatabase() async {
-    String path = join(await getDatabasesPath(), _databaseName);
-    return await openDatabase(path,
-        version: _databaseVersion, onCreate: _onCreate);
+  Future<Database> _initDatabase() async {
+    final String path = join(await getDatabasesPath(), _databaseName);
+    return openDatabase(path, version: _databaseVersion, onCreate: _onCreate);
   }
 
   Future _onCreate(Database db, int version) async {
@@ -47,15 +46,15 @@ class PersistentDataSource implements NetguruValuesLocalDataSource {
           )
           ''');
 
-    for (NetguruValueModel v in coreValues.values) {
+    for (final NetguruValueModel v in coreValues.values) {
       db.insert(tableValues, v.toMap());
     }
   }
 
   @override
   Future<List<NetguruValueModel>> getAll() async {
-    Database db = await instance.database;
-    List<Map> maps = await db.query(tableValues);
+    final Database db = await instance.database;
+    final List<Map> maps = await db.query(tableValues);
     return List.generate(maps.length, (i) {
       return NetguruValueModel.fromMap(maps[i]);
     });
@@ -63,24 +62,26 @@ class PersistentDataSource implements NetguruValuesLocalDataSource {
 
   @override
   Future<NetguruValueModel> getRandom() async {
-    Database db = await instance.database;
+    final Database db = await instance.database;
     final List<Map<String, dynamic>> maps = await db.query(tableValues);
-    int i = rng.nextInt(maps.length);
+    int i;
+    i = rng.nextInt(maps.length);
     return NetguruValueModel.fromMap(maps[i]);
   }
 
   @override
   Future<NetguruValueModel> getRandomFavorite() async {
-    Database db = await instance.database;
+    final Database db = await instance.database;
     final List<Map<String, dynamic>> maps =
-        await db.query(tableValues, where: "isFavorite = 1");
-    int i = rng.nextInt(maps.length);
+    await db.query(tableValues, where: "isFavorite = 1");
+    int i;
+    i = rng.nextInt(maps.length);
     return NetguruValueModel.fromMap(maps[i]);
   }
 
   @override
   Future<int> put(NetguruValueModel value) async {
-    Database db = await instance.database;
+    final Database db = await instance.database;
     return db.insert(tableValues, value.toMap());
   }
 }

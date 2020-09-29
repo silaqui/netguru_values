@@ -24,15 +24,15 @@ void main() {
   });
 
   group('SaveNewValueEvent', () {
-    final testValue = NetguruValueModel(text: 'test');
-    final savedTestValue = 1;
+    const testValue = NetguruValueModel(text: 'test');
+    const savedTestValue = 1;
 
     test(
       'should save new value using use case',
       () async {
         // given
         when(putNetguruValue(testValue))
-            .thenAnswer((_) async => Right(savedTestValue));
+            .thenAnswer((_) async => const Right(savedTestValue));
         // when
         tested.add(SaveNewValueEvent('test'));
         // then
@@ -50,7 +50,7 @@ void main() {
           Saved(),
         ];
         when(putNetguruValue(any)).thenAnswer((_) async =>
-            Right(savedTestValue));
+        const Right(savedTestValue));
         // when
         tested.add(SaveNewValueEvent('test'));
         // then
@@ -64,7 +64,7 @@ void main() {
         // given
         final expected = [
           Saving(),
-          Error(message: MEMORY_FAILURE_MESSAGE),
+          Error(message: memoryFailureMessage),
         ];
         when(putNetguruValue(any))
             .thenAnswer((_) async => Left(MemoryFailure()));

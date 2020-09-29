@@ -18,7 +18,7 @@ class ValuesBody extends StatelessWidget {
           } else if (state is Loaded) {
             return ValueDisplay(netguruValue: state.value);
           } else {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
         },
       ),

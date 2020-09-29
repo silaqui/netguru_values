@@ -7,7 +7,7 @@ class NetguruValue extends Equatable {
   final bool isFavorite;
   final bool isDefault;
 
-  NetguruValue({
+  const NetguruValue({
     this.id,
     @required this.text,
     this.isFavorite = false,

@@ -15,8 +15,9 @@ class AddValuePage extends StatelessWidget {
       create: (_) => getIt<AddValueBloc>(),
       child: BlocConsumer<AddValueBloc, AddValueState>(
         listener: (context, state) {
-          if (state is Error) {}
-
+          if (state is Error) {
+            FlushbarHelper.createError(message: state.message).show(context);
+          }
           if (state is Saved) {
             ExtendedNavigator.of(context).pop();
             FlushbarHelper.createInformation(

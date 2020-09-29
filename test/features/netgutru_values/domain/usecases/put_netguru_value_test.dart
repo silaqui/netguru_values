@@ -17,19 +17,19 @@ void main() {
     tested = PutNetguruValue(mockRepository);
   });
 
-  final testInput = NetguruValue(id: null, text: 'test', isFavorite: true);
-  final newIdFromDatabase = 1;
+  const testInput = NetguruValue(text: 'test', isFavorite: true);
+  const newIdFromDatabase = 1;
 
   test(
     'should put the Value in the repository',
     () async {
       // given
       when(mockRepository.put(testInput))
-          .thenAnswer((_) async => Right(newIdFromDatabase));
+          .thenAnswer((_) async => const Right(newIdFromDatabase));
       // when
       final actual = await tested(testInput);
       // then
-      expect(actual, Right(newIdFromDatabase));
+      expect(actual, const Right(newIdFromDatabase));
       verify(mockRepository.put(testInput));
       verifyNoMoreInteractions(mockRepository);
     },

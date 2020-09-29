@@ -18,18 +18,18 @@ void main() {
     tested = GetRandomFavoriteNetguruValue(mockRepository);
   });
 
-  final testValue = NetguruValue(id: 1, text: 'test', isFavorite: true);
+  const testValue = NetguruValue(id: 1, text: 'test', isFavorite: true);
 
   test(
     'should get one of the favorite Value from the repository',
     () async {
       // given
       when(mockRepository.getRandomFavorite())
-          .thenAnswer((_) async => Right(testValue));
+          .thenAnswer((_) async => const Right(testValue));
       // when
       final actual = await tested(NoParams());
       // then
-      expect(actual, Right(testValue));
+      expect(actual, const Right(testValue));
       verify(mockRepository.getRandomFavorite());
       verifyNoMoreInteractions(mockRepository);
     },

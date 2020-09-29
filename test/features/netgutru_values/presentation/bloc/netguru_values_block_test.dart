@@ -30,13 +30,14 @@ void main() {
   });
 
   group('GetRandomNetguruValueEvent', () {
-    final testValue = NetguruValue(id: 1, text: 'test', isFavorite: false);
+    const testValue = NetguruValue(id: 1, text: 'test');
 
     test(
       'should get data from the random use case',
       () async {
         // given
-        when(getRandom(NoParams())).thenAnswer((_) async => Right(testValue));
+        when(getRandom(NoParams()))
+            .thenAnswer((_) async => const Right(testValue));
         // when
         tested.add(GetRandomNetguruValueEvent());
         // then
@@ -52,7 +53,7 @@ void main() {
         final expected = [
           Loaded(value: testValue),
         ];
-        when(getRandom(any)).thenAnswer((_) async => Right(testValue));
+        when(getRandom(any)).thenAnswer((_) async => const Right(testValue));
         // when
         tested.add(GetRandomNetguruValueEvent());
         // then
@@ -65,7 +66,7 @@ void main() {
           () async {
         // given
         final expected = [
-          Error(message: MEMORY_FAILURE_MESSAGE),
+          Error(message: memoryFailureMessage),
         ];
         when(getRandom(any)).thenAnswer((_) async => Left(MemoryFailure()));
         // when
@@ -77,14 +78,14 @@ void main() {
   });
 
   group('GetRandomFavoriteNetguruValueEvent', () {
-    final testValue = NetguruValue(id: 1, text: 'test', isFavorite: true);
+    const testValue = NetguruValue(id: 1, text: 'test', isFavorite: true);
 
     test(
       'should get data from the random favorite use case',
-      () async {
+          () async {
         // given
         when(getRandomFavorite(NoParams()))
-            .thenAnswer((_) async => Right(testValue));
+            .thenAnswer((_) async => const Right(testValue));
         // when
         tested.add(GetRandomFavoriteNetguruValueEvent());
         // then
@@ -100,7 +101,8 @@ void main() {
         final expected = [
           Loaded(value: testValue),
         ];
-        when(getRandomFavorite(any)).thenAnswer((_) async => Right(testValue));
+        when(getRandomFavorite(any)).thenAnswer((_) async =>
+        const Right(testValue));
         // when
         tested.add(GetRandomFavoriteNetguruValueEvent());
         // then
@@ -113,7 +115,7 @@ void main() {
           () async {
         // given
         final expected = [
-          Error(message: MEMORY_FAILURE_MESSAGE),
+          Error(message: memoryFailureMessage),
         ];
         when(getRandomFavorite(any))
             .thenAnswer((_) async => Left(MemoryFailure()));

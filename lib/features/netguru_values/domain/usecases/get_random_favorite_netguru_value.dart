@@ -11,6 +11,6 @@ class GetRandomFavoriteNetguruValue implements UseCase<NetguruValue, NoParams> {
 
   @override
   Future<Either<Failure, NetguruValue>> call(NoParams params) async {
-    return await repository.getRandomFavorite();
+    return repository.getRandomFavorite();
   }
 }
